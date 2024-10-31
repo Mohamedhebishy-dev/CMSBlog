@@ -1,0 +1,154 @@
+﻿@inject UserManager<ApplicationUser> UserManger
+@model ArticleVModel
+    <!--Section: Post data-mdb-->
+    <section class="border-bottom mb-4">
+        <h1 class=" p-3">@Model.Article.Title</h1>
+    <div class="bg-image hover-overlay shadow-1-strong rounded" data-mdb-ripple-init data-mdb-ripple-color="light">
+        <img src="~/Uploads/Articles/Images/@Model.Article.ImageName" class="img-fluid shadow-2-strong rounded mb-4 w-100 h-50" />
+  
+     
+    </div>
+
+        <div class="row align-items-center mb-4 p-2 pt-3">
+            <div class="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
+            <img src="~/Uploads/Profiles/Images/profile.png" class="rounded-circle shadow-1-strong me-2"
+                     height="35" alt="" loading="lazy" />
+                <span> @ResData.lblCreatedDate <u>@Model.Article.CreatedDate</u>@ResData.lblCreatedBy</span>
+            @{
+                var user = await UserManger.FindByIdAsync(Model.Article.CreatedBy.ToString());
+                <a href="" class="text-dark">@user.Name</a>
+            }
+            </div>
+
+            <div class="col-lg-6 text-center text-lg-end">
+                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
+                        style="background-color: #3b5998;">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
+                        style="background-color: #55acee;">
+                    <i class="fab fa-twitter"></i>
+                </button>
+                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
+                        style="background-color: #0082ca;">
+                    <i class="fab fa-linkedin"></i>
+                </button>
+                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init>
+                    <i class="fas fa-comments"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!--Section: Post data-mdb-->
+    <!--Section: Text-->
+<section>
+ @Html.Raw(Model.Article.ContentHtml)
+</section>
+    <!--Section: Text-->
+    <!--Section: Share buttons-->
+    <section class="text-center border-top border-bottom py-4 mb-4">
+        <p><strong>Share with your friends:</strong></p>
+
+        <button type="button" class="btn btn-primary me-1" data-mdb-ripple-init style="background-color: #3b5998;">
+            <i class="fab fa-facebook-f"></i>
+        </button>
+        <button type="button" class="btn btn-primary me-1" data-mdb-ripple-init style="background-color: #55acee;">
+            <i class="fab fa-twitter"></i>
+        </button>
+        <button type="button" class="btn btn-primary me-1" data-mdb-ripple-init style="background-color: #0082ca;">
+            <i class="fab fa-linkedin"></i>
+        </button>
+        <button type="button" class="btn btn-primary me-1" data-mdb-ripple-init>
+            <i class="fas fa-comments me-2"></i>Add comment
+        </button>
+    </section>
+    <!--Section: Share buttons-->
+    <!--Section: Author-->
+    <section class="border-bottom mb-4 pb-4">
+        <div class="row">
+            <div class="col-3">
+                <img src="~/Uploads/Profiles/Images/profile.png"
+                     class="img-fluid shadow-1-strong rounded" alt="" />
+            </div>
+
+            <div class="col-9">
+                <p class="mb-2"><strong>Anna Maria Doe</strong></p>
+                <a href="" class="text-dark"><i class="fab fa-facebook-f me-1"></i></a>
+                <a href="" class="text-dark"><i class="fab fa-twitter me-1"></i></a>
+                <a href="" class="text-dark"><i class="fab fa-linkedin me-1"></i></a>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio est ab iure
+                    inventore dolorum consectetur? Molestiae aperiam atque quasi consequatur aut?
+                    Repellendus alias dolor ad nam, soluta distinctio quis accusantium!
+                </p>
+            </div>
+        </div>
+    </section>
+    <!--Section: Author-->
+<!--Section: Reply-->
+
+<section>
+    <p class="text-center"><strong>@ResData.LeaveAReplay</strong></p>
+
+    <form asp-controller="Article" asp-action="AddComment">
+        <!-- Name input -->
+        <div class="form-outline mb-4" data-mdb-input-init>
+            <input name="Name" type="text" id="form4Example1" class="form-control" />
+            <label class="form-label" for="form4Example1">Name</label>
+        </div>
+
+        <!-- Email input -->
+        <div class="form-outline mb-4" data-mdb-input-init>
+            <input name="Email" type="email" id="form4Example2" class="form-control" />
+            <label class="form-label" for="form4Example2">Email address</label>
+        </div>
+
+        <!-- Message input -->
+        <div class="form-outline mb-4" data-mdb-input-init>
+            <textarea name="CommentContent" class="form-control" id="form4Example3" rows="4"></textarea>
+            <label class="form-label" for="form4Example3">Text</label>
+            <input type="hidden" name="ArticleId" value="@Model.Article.ArticleId" />
+            <input type="hidden" name="ArticleUrl" value="@Model.Article.Url" />
+        </div>
+
+        <!-- Checkbox -->
+        <div class="form-check d-flex justify-content-center mb-4">
+            <input class="form-check-input me-2" type="checkbox" value="" id="form4Example4" checked />
+            <label class="form-check-label" for="form4Example4">
+                Send me a copy of this comment
+            </label>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
+            Publish
+        </button>
+    </form>
+</section>
+
+<!--Section: Comments-->
+    <section class=" mb-3">
+        <p class="text-center"><strong>Comments: @Model.comments.Count()</strong></p>
+
+        <!-- Comment -->
+    @foreach(var comment in Model.comments)
+    {
+        <div class="row mb-4 border rounded p-2 ">
+            <div class="col-2">
+                <img src="~/Uploads/Profiles/Images/profile.png"
+                     class="img-fluid shadow-1-strong rounded" alt="" />
+            </div>
+
+            <div class="col-10">
+                <p class="mb-2"><strong>@comment.Name</strong></p>
+                <p>
+                   @comment.CommentContent
+                </p>
+            </div>
+        </div>
+  
+       
+    }
+
+    </section>
+    <!--Section: Comments-->

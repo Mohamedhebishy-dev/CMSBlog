@@ -1,0 +1,68 @@
+﻿@model List<Category>;
+@{
+    ViewData["Title"] = ResAdmin.lblCategories;
+    ViewData["TitleHeader"] = ResAdmin.lblCategories;
+}
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">DataTable with default features</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <a asp-action="Add" class="btn btn-outline-primary">@ResAdmin.lblNewCategory</a>
+            <table id="example1" class="table table-bordered table-striped text-center dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>@ResAdmin.lblCategoryName</th>
+                        <th>@ResAdmin.lblUrls</th>
+                        <th>@ResAdmin.lblActions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CategoryId</td>
+                            <td>@item.CategoryName</td>
+                            <td>@item.CategoryUrl</td>
+                            <td>
+                                <a asp-controller="Category" asp-action="Details" asp-route-categoryId="@item.CategoryId" class="btn btn-info">@ResAdmin.lblInfo</a>
+
+                                <a asp-controller="Category" asp-action="Edit" asp-route-categoryId="@item.CategoryId" class="btn btn-warning">@ResAdmin.lblEdit</a>
+                                <a asp-controller="Category" asp-action="Delete" asp-route-categoryId="@item.CategoryId" class="btn btn-danger">@ResAdmin.lblDelete</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+
+@section Scripts {
+    <!-- jQuery -->
+    <script src="~/Admin/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables -->
+    <script src="~/Admin/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+        });
+    </script>
+}

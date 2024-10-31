@@ -1,0 +1,7 @@
+﻿@model List<Category>
+
+@foreach(var item in Model)
+{
+    
+<a class="btn btn-outline-primary fs-2" href="~/category/@item.CategoryUrl">@item.CategoryName</a>
+}

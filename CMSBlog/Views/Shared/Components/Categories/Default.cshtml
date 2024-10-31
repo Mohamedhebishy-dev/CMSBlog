@@ -1,0 +1,25 @@
+﻿@using Domain;
+@using CMSBlog.Resources;
+@model List<Category>
+
+
+
+
+
+    <!-- Light -->
+    <div class="btn-group shadow-0">
+        <button type="button" class="btn fs-6 nav-item dropdown-toggle" data-mdb-dropdown-init data-mdb-ripple-init aria-expanded="false">
+            @ResGeneral.lblCategories
+        </button>
+        <ul class="dropdown-menu">
+            @foreach (var item in Model)
+            {
+                <li><a class="dropdown-item nav-link" href="~/category/@item.CategoryUrl">@item.CategoryName</a></li>
+
+            }
+
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="~/Category">@ResGeneral.lblAllCategories</a></li>
+        </ul>
+    </div>
+
