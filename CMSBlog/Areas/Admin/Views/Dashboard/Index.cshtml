@@ -1,4 +1,28 @@
-﻿@{
+﻿@model List<ReportCardsView>
+@{
     ViewData["Title"] = "Dashboard";
     ViewData["TitleHeader"] = "Reports";
 }
+<div class="row  ">
+    @foreach(var card in Model)
+    {
+        <div class="col-lg-3 col-6 ">
+            <!-- small card -->
+            <div class="small-box @card.BackgroundColor">
+                <div class="inner">
+                    <h3>@card.Count</h3>
+
+                    <p class="fs-1 ">@Html.Raw(card.Title)</p>
+                </div>
+                <div class="icon">
+                    <i class="@card.Icon"></i>
+                </div>
+                <a href="~/Admin/@card.Link" class="small-box-footer">
+                   @ResAdmin.lblMoreInfo <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    }
+
+
+</div>

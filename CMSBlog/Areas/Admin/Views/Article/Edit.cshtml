@@ -1,0 +1,114 @@
+﻿@model ArticleViewModel
+
+@{
+    ViewData["Title"] = "Add";
+}
+@section Styles {
+
+    <link rel="stylesheet" href="~/Admin/plugins/summernote/summernote-bs4.css">
+
+}
+<h1>Edit</h1>
+
+<style>
+    .note-btn-group .dropdown-menu {
+       left:auto !important;
+    }
+        </style>
+<h4>Article</h4>
+<hr />
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+     
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                 <input type="hidden" value="@Model.ArticleId" name="ArticleId" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Url" class="control-label"></label>
+                    <input asp-for="Url" class="form-control" />
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>chose Image</label>
+                    <input id="tbImgName" type="file" name="Files" class="form-control" placeholder="@ResAdmin.lblImage"
+                           onchange="Upload.UploadDefaultImg(event)" accept=".jpg, .jpeg, .png, ,.gif" />
+                    <div id="tbImgSrc" class="w-50">
+                        <img src="~/Uploads/Articles/Images/@Model.ImageName" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Select</label>
+                    <select class="form-control" name="CategoryId" asp-items="@(new SelectList( ViewBag.Categories,"CategoryId","CategoryName"))">
+                    </select>
+                </div>
+
+                <div class="card-body pad">
+                    <div class="mb-3">
+                        <textarea id="summernote" asp-for="ContentHtml" placeholder="Place some text here"
+                                  style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                    </div>
+
+                    <div id="summernote"></div>
+                    <script>
+                        $('#summernote').summernote({
+                            placeholder: 'Hello Bootstrap 4',
+                            tabsize: 2,
+                            height: 100
+                        });
+                    </script>
+
+                    <div class="form-group">
+                        <input type="submit" formmethod="post" value="@ResAdmin.lblEdit" name="Create" class="btn btn-primary" />
+                    </div>
+            </form>
+
+            <div>
+                <a class="btn btn-primary" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+
+
+    @section Scripts {
+
+
+        <script src="~/Admin/plugins/summernote/summernote-bs4.min.js"></script>
+        <script>
+            $('#summernote').summernote({
+                placeholder: 'اكتب هنا',
+                tabsize: 2,
+                height: 100
+            });
+        </script>
+        <script>
+            var Upload = {
+                UploadDefaultImg: function (e) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        CourseMediaImgName = file.name;
+                        CourseMediaImgBase64 = reader.result.slice(reader.result.indexOf('base64,') + 7);
+                        $("#tbImgName").html(file.name)
+                        $("#tbImgSrc").html(`<img class="thumbnail" src = "${reader.result}"  style = "width: 200px;height: 300px;border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />`)
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+        </script>
+
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        }
+    }

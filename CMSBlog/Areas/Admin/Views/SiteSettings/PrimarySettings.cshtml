@@ -1,0 +1,532 @@
+﻿@model SiteSettings
+
+<style>
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    .tag {
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+        .tag .remove-tag {
+            cursor: pointer;
+            font-weight: bold;
+        }
+</style>
+<style>
+    .main-menu {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    .sub-items {
+        margin-top: 10px;
+        padding-left: 20px;
+    }
+</style>
+<style>
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    .tag {
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+        .tag .remove-tag {
+            cursor: pointer;
+            font-weight: bold;
+        }
+</style>
+
+<h4>@ResAdmin.lblSiteSettings</h4>
+<hr />
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title float-left ">@ResAdmin.lblSiteSettings</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body ">
+            <form asp-controller="SiteSettings" asp-action="PrimarySettings" method="post" enctype="multipart/form-data">
+                <input name="id" value="@Model.Id" type="hidden" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="WebSiteName" class="control-label">@ResAdmin.lblWebSiteName</label>
+                    <input asp-for="WebSiteName" class="form-control" />
+                    <span asp-validation-for="WebSiteName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">@ResAdmin.lblDescriptionSite</label>
+                    <textarea asp-for="Description" class="form-control" ></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LogoName" class="control-label">@ResAdmin.lblLogoName</label>
+                    <input asp-for="LogoName" id="tbImgName" type="file" name="Files" class="form-control" placeholder="@ResAdmin.lblImage"
+                           onchange="Upload.UploadDefaultImg(event)" accept=".jpg, .jpeg, .png, ,.gif" />
+                    <div id="tbImgSrc" class="w-50">
+                        <img class="thumbnail" src="~/Uploads/Website/Images/@Model.LogoName" style="width: 200px;height: 300px;border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />
+                    </div>
+                    <span asp-validation-for="LogoName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Adress" class="control-label">@ResAdmin.lblAdress</label>
+                    <input asp-for="Adress" class="form-control" />
+                    <span asp-validation-for="Adress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmailAddress" class="control-label">@ResAdmin.lblEmail</label>
+                    <input asp-for="EmailAddress" class="form-control" />
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ContactNumber" class="control-label">@ResAdmin.lblContactNumber</label>
+                    <input asp-for="ContactNumber" class="form-control" />
+                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FacebookLink" class="control-label">@ResAdmin.lblFacebookLink</label>
+                    <input asp-for="FacebookLink" class="form-control" />
+                    <span asp-validation-for="FacebookLink" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="InstagramLink" class="control-label">@ResAdmin.lblInstagramLink</label>
+                    <input asp-for="InstagramLink" class="form-control" />
+                    <span asp-validation-for="InstagramLink" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="XLink" class="control-label">@ResAdmin.lblXLink</label>
+                    <input asp-for="XLink" class="form-control" />
+                    <span asp-validation-for="XLink" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LinkedInLink" class="control-label">@ResAdmin.lblLinkedInLink</label>
+                    <input asp-for="LinkedInLink" class="form-control" />
+                    <span asp-validation-for="LinkedInLink" class="text-danger"></span>
+                </div>
+
+          
+
+                <div class="form-group">
+
+                    <div id="group1" class="mb-4">
+                        <h5>@ResAdmin.lblColumnLinks1</h5>
+                        <label class="form-label">@ResAdmin.lblUrlName</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control name-input" placeholder="@ResAdmin.lblUrlName">
+                        </div>
+                        <label class="form-label">@ResAdmin.lblUrls</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control link-input" placeholder="@ResAdmin.lblUrls">
+                            <button type="button" class="btn btn-primary add-link-button">إضافة</button>
+                        </div>
+                        <div class="tags-container my-2 border p-4 rounded "></div>
+                        <input asp-for="ColumnLinks1" type="hidden" class="hidden-input" name="ColumnLinks1" value="@Model.ColumnLinks1">
+                    </div>
+                   
+
+                 
+                    <span asp-validation-for="ColumnLinks1" class="text-danger"></span>
+              
+                
+                
+                
+                </div>
+
+                <div class="form-group">
+
+                    <div id="group2" class="mb-4">
+                        <h5>@ResAdmin.lblColumnLinks2</h5>
+                        <label class="form-label">@ResAdmin.lblUrlName</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control name-input" placeholder="@ResAdmin.lblUrlName">
+                        </div>
+                        <label class="form-label">@ResAdmin.lblUrls</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control link-input" placeholder="@ResAdmin.lblUrls">
+                            <button type="button" class="btn btn-primary add-link-button">إضافة</button>
+                        </div>
+                        <div class="tags-container my-2 border p-4 rounded "></div>
+                        <input asp-for="ColumnLinks2" type="hidden" class="hidden-input" name="ColumnLinks2" value="@Model.ColumnLinks2">
+                    </div>
+
+
+
+
+
+                    <span asp-validation-for="ColumnLinks2" class="text-danger"></span>
+
+
+
+
+                </div>
+                <div class="form-group">
+                    <div class="container mt-4">
+                        <h2 class="text-center mb-4">إدارة القائمة</h2>
+
+                        <div id="menu-container">
+                            <!-- يتم تحميل القوائم من الـ JSON هنا -->
+                        </div>
+
+                        <button id="add-main-menu" type="button" class="btn btn-success mb-3">إضافة قائمة رئيسية</button>
+
+                   @*      <h4>الـ JSON الناتج:</h4> *@
+                        <div id="json-output" class="json-output" style="display:none">
+                           
+                        </div>
+                        <input type="hidden" id="hidden-json" name="Menu" value="" />
+
+                        <h4 class="mt-4">معاينة القائمة</h4>
+                        <nav id="navbar-preview" class="navbar navbar-expand-lg navbar-light bg-light">
+                            <div class="container-fluid">
+                                <a class="navbar-brand" href="#">معاينة</a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPreviewContent" aria-controls="navbarPreviewContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarPreviewContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <!-- عناصر المعاينة يتم إضافتها هنا -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" formmethod="post" value="@ResAdmin.lblSave" name="Create" class="btn p-2 btn-primary " />
+                </div>
+            </form>
+
+            <div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+        <script>
+        
+            $(document).ready(function () {
+                // بيانات JSON الأولية (يمكن استبدالها ببيانات قادمة من الخادم)
+                let initialData =  @Html.Raw(Model.Menu)
+                console.log(initialData)
+
+                // تحميل القوائم الأولية
+                function loadMenu(data) {
+                    data.forEach(menu => {
+                        const mainMenuHtml = createMainMenuHtml(menu);
+                        $("#menu-container").append(mainMenuHtml);
+                    });
+                    generateJSON();
+                }
+
+                // إنشاء HTML للقائمة الرئيسية
+                function createMainMenuHtml(menu) {
+                    let subItemsHtml = '';
+                    menu.subItems.forEach(subItem => {
+                        subItemsHtml += `
+                            <li class="mb-2">
+                                <input type="text" class="form-control update d-inline-block sub-title" style="width: 30%;" value="${subItem.title}" placeholder="عنوان الرابط الفرعي" />
+                                <input type="text" class="form-control update d-inline-block sub-url" style="width: 30%;" value="${subItem.url}" placeholder="رابط الرابط الفرعي" />
+                                <input type="text" class="form-control update d-inline-block sub-icon" style="width: 20%;" value="${subItem.icon}" placeholder="أيقونة الرابط الفرعي" />
+                                <button  type="button" class="btn btn-danger btn-sm remove-sub-item">حذف</button>
+                            </li>
+                        `;
+                    });
+
+                    return `
+                        <div class="main-menu">
+                            <div class="mb-3">
+                                <label>عنوان القائمة الرئيسية</label>
+                                <input type="text" class="form-control update main-title" value="${menu.title}" placeholder="عنوان القائمة الرئيسية" />
+                            </div>
+                            <div class="mb-3">
+                                <label>رابط القائمة الرئيسية</label>
+                                <input type="text" class="form-control update main-url" value="${menu.url}" placeholder="رابط القائمة الرئيسية" />
+                            </div>
+                            <div class="mb-3">
+                                <label>أيقونة القائمة الرئيسية</label>
+                                <input type="text" class="form-control update main-icon" value="${menu.icon}" placeholder="أيقونة القائمة الرئيسية" />
+                            </div>
+                            <button  type="button" class="btn btn-primary btn-sm add-sub-item">إضافة رابط فرعي</button>
+                            <ul class="sub-items">${subItemsHtml}</ul>
+                            <button  type="button" class="btn btn-danger btn-sm remove-main-menu mt-2">حذف القائمة الرئيسية</button>
+                        </div>
+                    `;
+                }
+           
+                // إضافة قائمة رئيسية جديدة
+                $("#add-main-menu").click(function () {
+                    $("#menu-container").append(createMainMenuHtml({ title: "", url: "", icon: "", subItems: [] }));
+                    generateJSON();
+                });
+
+                // إضافة رابط فرعي
+                $(document).on("click", ".add-sub-item", function () {
+                    $(this).siblings(".sub-items").append(`
+                        <li class="mb-2">
+                            <input type="text" class="form-control update d-inline-block sub-title" style="width: 30%;" placeholder="عنوان الرابط الفرعي" />
+                            <input type="text" class="form-control update d-inline-block sub-url" style="width: 30%;" placeholder="رابط الرابط الفرعي" />
+                            <input type="text" class="form-control update d-inline-block sub-icon" style="width: 20%;" placeholder="أيقونة الرابط الفرعي" />
+                            <button  type="button" class="btn btn-danger btn-sm remove-sub-item">حذف</button>
+                        </li>
+                    `);
+                    generateJSON();
+                });
+                     $(document).on("input", ".update", function () {
+                  generateJSON();
+                        updateNavbarPreview(menuItems);
+              });
+                // حذف قائمة رئيسية
+                $(document).on("click", ".remove-main-menu", function () {
+                    $(this).closest(".main-menu").remove();
+                    generateJSON();
+                });
+
+                // حذف رابط فرعي
+                $(document).on("click", ".remove-sub-item", function () {
+                    $(this).closest("li").remove();
+                    generateJSON();
+                });
+
+                // توليد JSON وتحديث الحقل المخفي
+                      function generateJSON() {
+                const menuItems = [];
+                $(".main-menu").each(function () {
+                    const title = $(this).find(".main-title").val();
+                    const url = $(this).find(".main-url").val();
+                    const icon = $(this).find(".main-icon").val();
+
+                    const subItems = [];
+                    $(this).find(".sub-items li").each(function () {
+                        const subTitle = $(this).find(".sub-title").val();
+                        const subUrl = $(this).find(".sub-url").val();
+                        const subIcon = $(this).find(".sub-icon").val();
+                        subItems.push({ title: subTitle, url: subUrl, icon: subIcon });
+                    });
+
+                    menuItems.push({ title, url, icon, subItems });
+                });
+
+                const jsonOutput = JSON.stringify(menuItems, null, 4);
+                $("#json-output").text(jsonOutput);
+                $("#hidden-json").val(jsonOutput);
+
+
+
+
+                // تحديث معاينة القائمة
+                updateNavbarPreview(menuItems);
+            }
+                   function updateNavbarPreview(menuItems) {
+                const navbarPreview = $("#navbar-preview .navbar-nav");
+                navbarPreview.empty(); // تفريغ القائمة الحالية
+
+                menuItems.forEach(menu => {
+                    const dropdownHtml = menu.subItems.map(subItem => `
+                        <li>
+                            <a class="dropdown-item" href="${subItem.url}">
+                                <i class="${subItem.icon} me-2"></i>${subItem.title}
+                            </a>
+                        </li>
+                    `).join("");
+
+                    const menuItemHtml = menu.subItems.length > 0
+                        ? `
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown${menu.title}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="${menu.icon} me-2"></i>${menu.title}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown${menu.title}">
+                                    ${dropdownHtml}
+                                </ul>
+                            </li>
+                        `
+                        : `
+                            <li class="nav-item">
+                                <a class="nav-link" href="${menu.url}">
+                                    <i class="${menu.icon} me-2"></i>${menu.title}
+                                </a>
+                            </li>
+                        `;
+
+                    navbarPreview.append(menuItemHtml);
+                });
+            }
+            $(document).on("click", ".nav-link.dropdown-toggle", function (e) {
+                e.preventDefault(); // منع الانتقال إلى الرابط
+                const dropdownMenu = $(this).siblings(".dropdown-menu");
+
+                // التبديل بين إظهار/إخفاء القائمة المنسدلة
+                dropdownMenu.toggleClass("show");
+            });
+
+
+
+
+                // تحميل القوائم الأولية عند فتح الصفحة
+                loadMenu(initialData);
+            });
+
+      
+        </script>
+    
+            <script>
+                var Upload = {
+                    UploadDefaultImg: function (e) {
+                        const file = e.target.files[0];
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                            CourseMediaImgName = file.name;
+                            CourseMediaImgBase64 = reader.result.slice(reader.result.indexOf('base64,') + 7);
+                            $("#tbImgName").html(file.name)
+                            $("#tbImgSrc").html(`<img class="thumbnail" src = "${reader.result}"  style = "width: 200px;height: 300px;border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />`)
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+            </script>
+
+           
+
+        @if (TempData["MessageType"] != null)
+        {
+            <script>
+                 let MessageType = @TempData["MessageType"];
+                 console.log(MessageType);
+                 switch (MessageType)
+                 {
+                 case 1:alert.Success('@Html.Raw(MessagesAR.SuccessMessage)','@Html.Raw(MessagesAR.SaveSuccessMessage)');
+                     break;
+                case 2:alert.Error('@Html.Raw(MessagesAR.ErrorMessage)','@Html.Raw(MessagesAR.SaveFailed)');
+                     break;
+                case 3:
+                     alert.Success('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.DeleteSuccessMessage)');
+                     break;
+                 case 4:
+                     alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.DeleteFailed)')
+                     break;
+                 case 5:
+                         alert.Success   ('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.UpdateSuccessMessage)');
+                     break;
+                 case 6:
+                     alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.UpdateFailed)');
+                     break;
+                     default: break;
+                 }
+            </script>
+        }
+
+        <script>
+            document.querySelectorAll('[id^="group"]').forEach(group => {
+                const selectedLinks = new Set();
+                const nameInput = group.querySelector('.name-input');
+                const linkInput = group.querySelector('.link-input');
+                const addLinkButton = group.querySelector('.add-link-button');
+                const tagsContainer = group.querySelector('.tags-container');
+                const hiddenInput = group.querySelector('.hidden-input');
+
+                // تحميل القيم الموجودة مسبقًا من input المخفي
+                const existingLinks = hiddenInput.value.split(',').filter(Boolean);
+                existingLinks.forEach(fullValue => {
+                    const [nameValue, linkValue] = fullValue.split('-');
+                    selectedLinks.add(fullValue);
+
+                    const tag = document.createElement('div');
+                    tag.className = 'tag';
+                    tag.innerHTML = `
+                        ${nameValue} (${linkValue})
+                        <span class="remove-tag" data-value="${fullValue}">&times;</span>
+                    `;
+                    tagsContainer.appendChild(tag);
+                });
+
+                // إضافة رابط عند النقر على الزر
+                addLinkButton.addEventListener('click', () => {
+                    const nameValue = nameInput.value.trim();
+                    const linkValue = linkInput.value.trim();
+
+                    if (nameValue && linkValue) {
+                        const fullValue = `${nameValue}-${linkValue}`;
+
+                        if (!selectedLinks.has(fullValue)) {
+                            selectedLinks.add(fullValue);
+
+                            // إنشاء العلامة وإضافتها إلى الواجهة
+                            const tag = document.createElement('div');
+                            tag.className = 'tag';
+                            tag.innerHTML = `
+                                ${nameValue} (${linkValue})
+                                <span class="remove-tag" data-value="${fullValue}">&times;</span>
+                            `;
+                            tagsContainer.appendChild(tag);
+
+                            // تحديث الحقل المخفي
+                            updateHiddenInput();
+
+                            // إفراغ حقول الإدخال
+                            nameInput.value = '';
+                            linkInput.value = '';
+                        }
+                    }
+                });
+
+                // حدث لإزالة العلامة عند النقر على "x"
+                tagsContainer.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('remove-tag')) {
+                        const value = e.target.getAttribute('data-value');
+                        selectedLinks.delete(value);
+
+                        // إزالة العلامة من واجهة المستخدم
+                        e.target.parentElement.remove();
+
+                        // تحديث الحقل المخفي
+                        updateHiddenInput();
+                    }
+                });
+
+                // تحديث قيمة الـ input المخفي
+                function updateHiddenInput() {
+                    hiddenInput.value = Array.from(selectedLinks).join(',');
+                }
+            });
+        </script>
+        }

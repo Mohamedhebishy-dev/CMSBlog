@@ -61,7 +61,16 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الأحداث.
+        ///   Looks up a localized string similar to DR/Elsayed Zakria.
+        /// </summary>
+        public static string DR {
+            get {
+                return ResourceManager.GetString("DR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actions.
         /// </summary>
         public static string lblActions {
             get {
@@ -70,7 +79,43 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to هل انت متأكد من هذا التعديل.
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string lblAdd {
+            get {
+                return ResourceManager.GetString("lblAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New User.
+        /// </summary>
+        public static string lblAddNewUser {
+            get {
+                return ResourceManager.GetString("lblAddNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Role.
+        /// </summary>
+        public static string lblAddRole {
+            get {
+                return ResourceManager.GetString("lblAddRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adress.
+        /// </summary>
+        public static string lblAdress {
+            get {
+                return ResourceManager.GetString("lblAdress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are YouSure Edit.
         /// </summary>
         public static string lblAreYouSureEdit {
             get {
@@ -79,7 +124,7 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to المقالات.
+        ///   Looks up a localized string similar to Articles.
         /// </summary>
         public static string lblArticles {
             get {
@@ -88,7 +133,7 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to التصنيفات.
+        ///   Looks up a localized string similar to Categories.
         /// </summary>
         public static string lblCategories {
             get {
@@ -97,7 +142,16 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اسم التصنيف.
+        ///   Looks up a localized string similar to Articles on the home page based on categories.
+        /// </summary>
+        public static string lblCategoryArticlesInHome {
+            get {
+                return ResourceManager.GetString("lblCategoryArticlesInHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category Name.
         /// </summary>
         public static string lblCategoryName {
             get {
@@ -106,7 +160,43 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to أنشئ بواسطة.
+        ///   Looks up a localized string similar to Chose Role.
+        /// </summary>
+        public static string lblChoseRole {
+            get {
+                return ResourceManager.GetString("lblChoseRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Column Links 1.
+        /// </summary>
+        public static string lblColumnLinks1 {
+            get {
+                return ResourceManager.GetString("lblColumnLinks1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Column Links 2.
+        /// </summary>
+        public static string lblColumnLinks2 {
+            get {
+                return ResourceManager.GetString("lblColumnLinks2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact Number.
+        /// </summary>
+        public static string lblContactNumber {
+            get {
+                return ResourceManager.GetString("lblContactNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created By.
         /// </summary>
         public static string lblCreatedBy {
             get {
@@ -115,7 +205,7 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تاريخ الإنشاء.
+        ///   Looks up a localized string similar to Created Date.
         /// </summary>
         public static string lblCreatedDate {
             get {
@@ -124,7 +214,7 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الحالة.
+        ///   Looks up a localized string similar to CurentState.
         /// </summary>
         public static string lblCurentState {
             get {
@@ -133,7 +223,16 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to حذف.
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        public static string lblDashboard {
+            get {
+                return ResourceManager.GetString("lblDashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string lblDelete {
             get {
@@ -142,7 +241,16 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تعديل.
+        ///   Looks up a localized string similar to Description Site.
+        /// </summary>
+        public static string lblDescriptionSite {
+            get {
+                return ResourceManager.GetString("lblDescriptionSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string lblEdit {
             get {
@@ -151,7 +259,43 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to صورة.
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string lblEmail {
+            get {
+                return ResourceManager.GetString("lblEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email Confirmed ?.
+        /// </summary>
+        public static string lblEmailConfirmed {
+            get {
+                return ResourceManager.GetString("lblEmailConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Facebook Link.
+        /// </summary>
+        public static string lblFacebookLink {
+            get {
+                return ResourceManager.GetString("lblFacebookLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string lblHome {
+            get {
+                return ResourceManager.GetString("lblHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
         /// </summary>
         public static string lblImage {
             get {
@@ -160,7 +304,7 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اسم الصورة.
+        ///   Looks up a localized string similar to ImageName.
         /// </summary>
         public static string lblImageName {
             get {
@@ -169,7 +313,7 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to عرض.
+        ///   Looks up a localized string similar to Info.
         /// </summary>
         public static string lblInfo {
             get {
@@ -178,7 +322,16 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اسم المنتج.
+        ///   Looks up a localized string similar to Instagram Link.
+        /// </summary>
+        public static string lblInstagramLink {
+            get {
+                return ResourceManager.GetString("lblInstagramLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ItemName.
         /// </summary>
         public static string lblItemName {
             get {
@@ -187,7 +340,7 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to نوع المنتج.
+        ///   Looks up a localized string similar to ItemType.
         /// </summary>
         public static string lblItemType {
             get {
@@ -196,7 +349,52 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to إضافة.
+        ///   Looks up a localized string similar to LinkedIn Link.
+        /// </summary>
+        public static string lblLinkedInLink {
+            get {
+                return ResourceManager.GetString("lblLinkedInLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logo image.
+        /// </summary>
+        public static string lblLogoName {
+            get {
+                return ResourceManager.GetString("lblLogoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mange Roles.
+        /// </summary>
+        public static string lblMangeRoles {
+            get {
+                return ResourceManager.GetString("lblMangeRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More Info.
+        /// </summary>
+        public static string lblMoreInfo {
+            get {
+                return ResourceManager.GetString("lblMoreInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Name.
+        /// </summary>
+        public static string lblName {
+            get {
+                return ResourceManager.GetString("lblName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
         /// </summary>
         public static string lblNew {
             get {
@@ -205,7 +403,16 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to إضافة تصنيف جديد.
+        ///   Looks up a localized string similar to NewArticle.
+        /// </summary>
+        public static string lblNewArticle {
+            get {
+                return ResourceManager.GetString("lblNewArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NewCategory.
         /// </summary>
         public static string lblNewCategory {
             get {
@@ -214,7 +421,34 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to سعر المنتج.
+        ///   Looks up a localized string similar to No Role.
+        /// </summary>
+        public static string lblNoRoles {
+            get {
+                return ResourceManager.GetString("lblNoRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string lblPassword {
+            get {
+                return ResourceManager.GetString("lblPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone Number.
+        /// </summary>
+        public static string lblPhoneNumber {
+            get {
+                return ResourceManager.GetString("lblPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
         /// </summary>
         public static string lblPrice {
             get {
@@ -223,7 +457,16 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to حفظ.
+        ///   Looks up a localized string similar to Roles.
+        /// </summary>
+        public static string lblRoles {
+            get {
+                return ResourceManager.GetString("lblRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string lblSave {
             get {
@@ -232,7 +475,7 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to بحث.
+        ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string lblSearch {
             get {
@@ -241,7 +484,7 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to بحث بواسطة التصنيف.
+        ///   Looks up a localized string similar to SearchByCategory.
         /// </summary>
         public static string lblSearchByCategory {
             get {
@@ -250,7 +493,43 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to عرض في الرئيسية.
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string lblSettings {
+            get {
+                return ResourceManager.GetString("lblSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings Home Page.
+        /// </summary>
+        public static string lblSettingsHomePage {
+            get {
+                return ResourceManager.GetString("lblSettingsHomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings Users.
+        /// </summary>
+        public static string lblSettingsUsers {
+            get {
+                return ResourceManager.GetString("lblSettingsUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        public static string lblshow {
+            get {
+                return ResourceManager.GetString("lblshow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ShowInHome.
         /// </summary>
         public static string lblShowInHome {
             get {
@@ -259,7 +538,16 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to العنوان.
+        ///   Looks up a localized string similar to Site Settings.
+        /// </summary>
+        public static string lblSiteSettings {
+            get {
+                return ResourceManager.GetString("lblSiteSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string lblTitle {
             get {
@@ -268,7 +556,16 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم التحديث بواسطة.
+        ///   Looks up a localized string similar to unknown.
+        /// </summary>
+        public static string lblUnknown {
+            get {
+                return ResourceManager.GetString("lblUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UpdateBy.
         /// </summary>
         public static string lblUpdateBy {
             get {
@@ -277,7 +574,7 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تاريخ التحديث.
+        ///   Looks up a localized string similar to UpdateDate.
         /// </summary>
         public static string lblUpdateDate {
             get {
@@ -286,7 +583,7 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to رفع ملف.
+        ///   Looks up a localized string similar to Upload.
         /// </summary>
         public static string lblUpload {
             get {
@@ -295,7 +592,16 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الروابط.
+        ///   Looks up a localized string similar to Name Url .
+        /// </summary>
+        public static string lblUrlName {
+            get {
+                return ResourceManager.GetString("lblUrlName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Urls.
         /// </summary>
         public static string lblUrls {
             get {
@@ -304,7 +610,25 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to عرض/تعديل.
+        ///   Looks up a localized string similar to User Name.
+        /// </summary>
+        public static string lblUserName {
+            get {
+                return ResourceManager.GetString("lblUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string lblUsers {
+            get {
+                return ResourceManager.GetString("lblUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ViewEdit.
         /// </summary>
         public static string lblViewEdit {
             get {
@@ -313,7 +637,25 @@ namespace CMSBlog.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to نعم تأكيد.
+        ///   Looks up a localized string similar to WebSite Name.
+        /// </summary>
+        public static string lblWebSiteName {
+            get {
+                return ResourceManager.GetString("lblWebSiteName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to X Link (twitter).
+        /// </summary>
+        public static string lblXLink {
+            get {
+                return ResourceManager.GetString("lblXLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YesConfrm.
         /// </summary>
         public static string lblYesConfrm {
             get {

@@ -1,0 +1,168 @@
+﻿@model List<ApplicationUser>;
+@inject UserManager<ApplicationUser> userManager
+@{
+    ViewData["Title"] = @ResAdmin.lblAddNewUser;
+    ViewData["TitleHeader"] = @ResAdmin.lblAddNewUser;
+}
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@ResAdmin.lblAddNewUser</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <a asp-action="Add" class="btn btn-outline-primary">@ResAdmin.lblAddNewUser</a>
+            <table id="example1" class="table table-bordered table-striped text-center dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                    <tr>
+                        <th>@ResAdmin.lblName</th>
+                        <th>@ResAdmin.lblUserName</th>
+                        <th>@ResAdmin.lblEmail</th>
+              
+                        <th>@ResAdmin.lblActions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.Name</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Email</td>
+                    
+                            <td>
+                                <a asp-controller="Users" asp-action="UserDetails" asp-route-Id="@item.Id" class="btn btn-info">@ResAdmin.lblInfo</a>
+                           
+                                <a asp-controller="Users" asp-action="Edit" asp-route-Id="@item.Id" class="btn btn-warning">@ResAdmin.lblEdit</a>
+                                <button data-id="@item.Id" class="btn btn-danger">@ResAdmin.lblDelete</button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+
+@section Scripts {
+    <!-- jQuery -->
+    <script src="~/Admin/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables -->
+    <script src="~/Admin/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script>
+        $(function () {
+        $("#example1").DataTable();
+        $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        });
+        });
+    </script>
+    <script>
+        $(document).ready(function (){
+        $(".btn-danger").on("click",function(e){
+        let id = $(this).data('id');
+        console.log(id)
+        let deleteUrl = `@Url.Action("Delete", "Users")`;
+        alert.ConfirmDelete(function(result){
+        if(result){
+        window.location.href=deleteUrl + "?id=" +id;
+        }
+        });
+        })
+        })
+    </script>
+    @if (TempData["MessageType"] != null)
+    {
+        <script>
+             let MessageType = @TempData["MessageType"];
+             console.log(MessageType);
+             switch (MessageType)
+             {
+             case 1:alert.Success('@Html.Raw(MessagesAR.SuccessMessage)','@Html.Raw(MessagesAR.SaveSuccessMessage)');
+                 break;
+            case 2:alert.Error('@Html.Raw(MessagesAR.ErrorMessage)','@Html.Raw(MessagesAR.SaveFailed)');
+                 break;
+            case 3:
+                 alert.Success('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.DeleteSuccessMessage)');
+                 break;
+             case 4:
+                 alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.DeleteFailed)')
+                 break;
+             case 5:
+                     alert.Success   ('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.UpdateSuccessMessage)');
+                 break;
+             case 6:
+                 alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.UpdateFailed)');
+                 break;
+                 default: break;
+             }
+        </script>
+        <script type="text/javascript">
+            $(function() {
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+              });
+
+              $('.swalDefaultSuccess').click(function() {
+                Toast.fire({
+                  type: 'success',
+                  title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+              });
+              $('.swalDefaultInfo').click(function() {
+                Toast.fire({
+                  type: 'info',
+                  title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+              });
+              $('.swalDefaultError').click(function() {
+                Toast.fire({
+                  type: 'error',
+                  title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+              });
+              $('.swalDefaultWarning').click(function() {
+                Toast.fire({
+                  type: 'warning',
+                  title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+              });
+              $('.swalDefaultQuestion').click(function() {
+                Toast.fire({
+                  type: 'question',
+                  title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+              });
+
+              $('.toastrDefaultSuccess').click(function() {
+                toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+              });
+              $('.toastrDefaultInfo').click(function() {
+                toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+              });
+              $('.toastrDefaultError').click(function() {
+                toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+              });
+              $('.toastrDefaultWarning').click(function() {
+                toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+              });
+            });
+
+        </script>
+    }
+}

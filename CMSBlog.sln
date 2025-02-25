@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bl", "Bl\Bl.csproj", "{11E633DA-E526-46BA-8475-5A3A5B6E9139}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{08C5B752-2B08-4F03-9F7D-33125C9A0D66}"
+	ProjectSection(ProjectDependencies) = postProject
+		{11E633DA-E526-46BA-8475-5A3A5B6E9139} = {11E633DA-E526-46BA-8475-5A3A5B6E9139}
+		{7ABAA00F-EB1C-41C0-BCA6-82EB4B7A688A} = {7ABAA00F-EB1C-41C0-BCA6-82EB4B7A688A}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,10 @@ Global
 		{11E633DA-E526-46BA-8475-5A3A5B6E9139}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11E633DA-E526-46BA-8475-5A3A5B6E9139}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11E633DA-E526-46BA-8475-5A3A5B6E9139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08C5B752-2B08-4F03-9F7D-33125C9A0D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08C5B752-2B08-4F03-9F7D-33125C9A0D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08C5B752-2B08-4F03-9F7D-33125C9A0D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08C5B752-2B08-4F03-9F7D-33125C9A0D66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

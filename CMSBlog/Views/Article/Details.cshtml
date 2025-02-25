@@ -1,26 +1,38 @@
 ﻿@inject UserManager<ApplicationUser> UserManger
 @model ArticleVModel
+<div class="container shadow card border border-5 border-warning p-4 my-4 rounded-3 mt-4">
     <!--Section: Post data-mdb-->
-    <section class="border-bottom mb-4">
-        <h1 class=" p-3">@Model.Article.Title</h1>
-    <div class="bg-image hover-overlay shadow-1-strong rounded" data-mdb-ripple-init data-mdb-ripple-color="light">
-        <img src="~/Uploads/Articles/Images/@Model.Article.ImageName" class="img-fluid shadow-2-strong rounded mb-4 w-100 h-50" />
-  
-     
-    </div>
-
-        <div class="row align-items-center mb-4 p-2 pt-3">
-            <div class="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
-            <img src="~/Uploads/Profiles/Images/profile.png" class="rounded-circle shadow-1-strong me-2"
-                     height="35" alt="" loading="lazy" />
-                <span> @ResData.lblCreatedDate <u>@Model.Article.CreatedDate</u>@ResData.lblCreatedBy</span>
-            @{
-                var user = await UserManger.FindByIdAsync(Model.Article.CreatedBy.ToString());
-                <a href="" class="text-dark">@user.Name</a>
-            }
+    <section class=" mb-4">
+        <div class="bg-image  hover-overlay  " data-mdb-ripple-init data-mdb-ripple-color="light">
+            <div class="text-center m-4">
+                <img src="~/Uploads/Articles/Images/@Model.Article.ImageName" class="img-fluid shadow-2-strong  mb-2 w-50 " height="100" />
             </div>
 
-            <div class="col-lg-6 text-center text-lg-end">
+
+        </div>
+
+        <div class="row  mb-4  ">
+            <div>
+                <h1 class="text-dark">@Model.Article.Title</h1>
+                @*        <img src="~/Uploads/Profiles/Images/profile.png" class="rounded-circle  shadow-1-strong me-2"
+                     height="50" alt="" loading="lazy" /> *@
+                <span class="">
+                    <i class="fas fa-pencil-alt mx-1"></i>
+                    @ResData.lblCreatedBy
+                    @{
+                        var user = await UserManger.FindByIdAsync(Model.Article.CreatedBy.ToString());
+                    }
+                    @user.Name
+                </span>
+                <span class="">
+                    <i class="nav-icon far fa-calendar-alt mx-1"></i>
+                    @ResData.lblCreatedDate
+                 @Model.Article.CreatedDate
+                </span>
+           
+            </div>
+
+     @*        <div class="col-lg-6 text-center text-lg-end">
                 <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
                         style="background-color: #3b5998;">
                     <i class="fab fa-facebook-f"></i>
@@ -36,17 +48,17 @@
                 <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init>
                     <i class="fas fa-comments"></i>
                 </button>
-            </div>
+            </div> *@
         </div>
     </section>
     <!--Section: Post data-mdb-->
     <!--Section: Text-->
-<section>
- @Html.Raw(Model.Article.ContentHtml)
-</section>
+    <article >
+        @Html.Raw(Model.Article.ContentHtml)
+    </article>
     <!--Section: Text-->
     <!--Section: Share buttons-->
-    <section class="text-center border-top border-bottom py-4 mb-4">
+@*     <section class="text-center border-top border-bottom py-4 mb-4">
         <p><strong>Share with your friends:</strong></p>
 
         <button type="button" class="btn btn-primary me-1" data-mdb-ripple-init style="background-color: #3b5998;">
@@ -61,18 +73,22 @@
         <button type="button" class="btn btn-primary me-1" data-mdb-ripple-init>
             <i class="fas fa-comments me-2"></i>Add comment
         </button>
-    </section>
+    </section> *@
     <!--Section: Share buttons-->
-    <!--Section: Author-->
+@*     <!--Section: Author-->
     <section class="border-bottom mb-4 pb-4">
         <div class="row">
             <div class="col-3">
                 <img src="~/Uploads/Profiles/Images/profile.png"
-                     class="img-fluid shadow-1-strong rounded" alt="" />
+                     class="  shadow-1-strong rounded" alt="" height="50" width="50" />
             </div>
 
             <div class="col-9">
-                <p class="mb-2"><strong>Anna Maria Doe</strong></p>
+                <p class="mb-2">
+                    <strong>
+                        @user.Name
+                    </strong>
+                </p>
                 <a href="" class="text-dark"><i class="fab fa-facebook-f me-1"></i></a>
                 <a href="" class="text-dark"><i class="fab fa-twitter me-1"></i></a>
                 <a href="" class="text-dark"><i class="fab fa-linkedin me-1"></i></a>
@@ -83,72 +99,74 @@
                 </p>
             </div>
         </div>
-    </section>
+    </section> *@
     <!--Section: Author-->
-<!--Section: Reply-->
+    <!--Section: Reply-->
 
-<section>
-    <p class="text-center"><strong>@ResData.LeaveAReplay</strong></p>
+ 
+    <div class="container  my-4">
 
-    <form asp-controller="Article" asp-action="AddComment">
-        <!-- Name input -->
-        <div class="form-outline mb-4" data-mdb-input-init>
-            <input name="Name" type="text" id="form4Example1" class="form-control" />
-            <label class="form-label" for="form4Example1">Name</label>
-        </div>
+        <!--Section: Comments-->
+        <section class=" py-4 mb-3">
+            <p class="text-center"><strong>Comments: @Model.comments.Count()</strong></p>
 
-        <!-- Email input -->
-        <div class="form-outline mb-4" data-mdb-input-init>
-            <input name="Email" type="email" id="form4Example2" class="form-control" />
-            <label class="form-label" for="form4Example2">Email address</label>
-        </div>
+            <!-- Comment -->
+            @foreach (var comment in Model.comments)
+            {
+                <div class="row mb-4 border rounded p-2 ">
+                    <div class="col-2">
+                        <img src="~/Uploads/Profiles/Images/profile.png"
+                             class="shadow-1-strong rounded" alt="" height="70" />
+                    </div>
 
-        <!-- Message input -->
-        <div class="form-outline mb-4" data-mdb-input-init>
-            <textarea name="CommentContent" class="form-control" id="form4Example3" rows="4"></textarea>
-            <label class="form-label" for="form4Example3">Text</label>
-            <input type="hidden" name="ArticleId" value="@Model.Article.ArticleId" />
-            <input type="hidden" name="ArticleUrl" value="@Model.Article.Url" />
-        </div>
+                    <div class="col-10">
+                        <p class="mb-2"><strong>@comment.Name</strong></p>
+                        <p>
+                            @comment.CommentContent
+                        </p>
+                    </div>
+                </div>
 
-        <!-- Checkbox -->
-        <div class="form-check d-flex justify-content-center mb-4">
-            <input class="form-check-input me-2" type="checkbox" value="" id="form4Example4" checked />
-            <label class="form-check-label" for="form4Example4">
-                Send me a copy of this comment
-            </label>
-        </div>
 
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
-            Publish
-        </button>
-    </form>
-</section>
+            }
 
-<!--Section: Comments-->
-    <section class=" mb-3">
-        <p class="text-center"><strong>Comments: @Model.comments.Count()</strong></p>
+        </section>
+        <!--Section: Comments-->
+        <section class="  border m-auto w-75 h-50 p-4 rounded-3">
 
-        <!-- Comment -->
-    @foreach(var comment in Model.comments)
-    {
-        <div class="row mb-4 border rounded p-2 ">
-            <div class="col-2">
-                <img src="~/Uploads/Profiles/Images/profile.png"
-                     class="img-fluid shadow-1-strong rounded" alt="" />
+            <div>
+                <p class="text-center"><strong>@ResData.LeaveAReplay</strong></p>
+
+                <form asp-controller="Article" asp-action="AddComment">
+                    <!-- Name input -->
+                    <div class=" mb-4" data-mdb-input-init>
+                        <label class="form-label" for="form4Example1">Name</label>
+                        <input name="Name" type="text" id="form4Example1" class="form-control" />
+                    </div>
+
+                    <!-- Email input -->
+                    <div class=" mb-4" data-mdb-input-init>
+                        <label class="form-label" for="form4Example2">Email address</label>
+                        <input name="Email" type="email" id="form4Example2" class="form-control" />
+                    </div>
+
+                    <!-- Message input -->
+                    <div class=" mb-4" data-mdb-input-init>
+                        <label class="form-label" for="form4Example3">Text</label>
+                        <textarea name="CommentContent" class="form-control" id="form4Example3" rows="4"></textarea>
+                        <input type="hidden" name="ArticleId" value="@Model.Article.ArticleId" />
+                        <input type="hidden" name="ArticleUrl" value="@Model.Article.Url" />
+                    </div>
+
+
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
+                        Publish
+                    </button>
+                </form>
             </div>
+        </section>
 
-            <div class="col-10">
-                <p class="mb-2"><strong>@comment.Name</strong></p>
-                <p>
-                   @comment.CommentContent
-                </p>
-            </div>
-        </div>
-  
-       
-    }
-
-    </section>
-    <!--Section: Comments-->
+    </div>
+</div>

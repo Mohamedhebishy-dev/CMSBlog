@@ -1,284 +1,423 @@
 ﻿@inject SignInManager<ApplicationUser> signInManger;
+    @inject ISiteSettingsService SettingsService;
+@{
+    var settings = await SettingsService.GetSiteSettingsAsync();
+}
 
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="en" dir="rtl" >
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>@ViewData["Title"]</title>
+    <title>Material Design for Bootstrap</title>
     <!-- MDB icon -->
-    <link rel="icon" href="~/template/img/mdb-favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="~/template/css/all.min.css" />
-    <!-- Google Fonts Cairo -->
+    <link
+    rel="stylesheet"
+    href="~/template/css/all.min.css" />
+    <link href='~/template/css/style.css' rel='stylesheet'>
+    <!-- Google Fonts Roboto -->
     <link href='~/template/css/Cairo.css' rel='stylesheet'>
 
-    <style>
-        * {
-            font-family: 'Cairo';
-        }
-    </style>
+    <link href="~/template/css/style.css" />
     <!-- MDB -->
-    <link rel="stylesheet" href="~/template/css/mdb.rtl.min.css" />
+    <link rel="stylesheet" href="~/template/css/mdb.free.css" />
     <script>
         function toggleTheme() {
-            // الحصول على عنصر body أو العنصر الذي يحتوي على data-mdb-theme
-            const body = document.body;
+        // الحصول على عنصر body أو العنصر الذي يحتوي على data-mdb-theme
+        const body = document.body;
 
-            // التحقق من السمة الحالية
-            if (body.getAttribute('data-mdb-theme') === 'light') {
-                // إذا كانت "light"، قم بتغييرها إلى "dark"
-                body.setAttribute('data-mdb-theme', 'dark');
-            } else {
-                // إذا كانت "dark"، قم بتغييرها إلى "light"
-                body.setAttribute('data-mdb-theme', 'light');
-            }
+        // التحقق من السمة الحالية
+        if (body.getAttribute('data-mdb-theme') === 'light') {
+        // إذا كانت "light"، قم بتغييرها إلى "dark"
+        body.setAttribute('data-mdb-theme', 'dark');
+        } else {
+        // إذا كانت "dark"، قم بتغييرها إلى "light"
+        body.setAttribute('data-mdb-theme', 'light');
+        }
         }
 
 
 
 
+        window.onscroll = function() {
+        var header = document.getElementById("main-header");
+        var sticky = header.offsetTop;
+
+        if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+        } else {
+        header.classList.remove("sticky");
+        }
+        };
 
     </script>
 </head>
-<body data-mdb-theme="light">
+<body data-mdb-theme="light" class="bg-militry">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
-        <!-- Container wrapper -->
-        <div class="container">
-            <!-- Toggle button -->
-            <button data-mdb-collapse-init
+    <div class="mb-4" style="z-index: 99999;">
+
+        @*        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000; background-color: rgba(0, 0, 0, 0.224);">
+            <div class="container">
+                <!-- Navbar brand -->
+                <img
+                src="~/template/img/ArmedForces.png"
+                height="70" width="70" class="rounded"
+                alt="MDB Logo"
+                loading="lazy"
+                />
+                <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                    <span class="fs-5 ms-2 me-2 text-light fw-bolder">التاريخ العسكري المصري</span>
+                </a> 
+                <button class="navbar-toggler" type="button" data-mdb-collapse-init data-mdb-target="#navbarExample01"
+                aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarExample01">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item fs-5">
+                            <a class="nav-link" href="#">الرئيسية</a>
+                        </li>
+                        <li class="nav-item fs-5">
+                            <a class="nav-link" href="#">التصنيفات</a>
+                        </li>
+                        <li class="nav-item fs-5">
+                            <a class="nav-link" href="#">تواصل معنا</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav list-inline">
+                        <!-- Icons -->
+
+                        <li class="nav-item">
+                            <a class="nav-link"  rel="nofollow" target="_blank">
+                                <img src="~/template/img/egypt.png" class="rounded" height="70" width="70">
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Navbar -->
+ *@
+        <!-- Carousel wrapper -->
+        @*   <div id="introCarousel" class=" carousel slide carousel-fade shadow-2-strong" data-mdb-carousel-init>
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                <li data-mdb-target="#introCarousel" data-mdb-slide-to="0" class="active"></li>
+                <li data-mdb-target="#introCarousel" data-mdb-slide-to="1"></li>
+                <li data-mdb-target="#introCarousel" data-mdb-slide-to="2"></li>
+            </div>
+
+            <!-- Inner -->
+            <div class="carousel-inner">
+                <!-- Single item -->
+                <div class="carousel-item active">
+                    <img src="~/template/img/nagib-12-jpg.jpg" class="d-block w-100 h-100" alt="...">
+                    <div class="mask" style="background-color: rgba(0, 0, 0, 0.301);">
+                        <div class="d-flex justify-content-center align-items-center h-100">
+
+                            <div class="text-white text-center" data-mdb-theme="dark">
+                                <h1 class="mb-3">تاريخ مشرف من العسكرية المصرية</h1>
+                                <h5 class="mb-4">التارخ هو الهوية التي نحاجي بها العالم</h5>
+                                <a class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init href="https://www.youtube.com/watch?v=c9B4TPnak1A"
+                                role="button" rel="nofollow" target="_blank">Start tutorial</a>
+                                <a class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init href="https://mdbootstrap.com/docs/standard/"
+                                target="_blank" role="button">Download MDB UI KIT</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single item -->
+                <div class="carousel-item ">
+                    <img src="~/template/img/123-175909-al-sadat-2jpeg.jpeg" class="d-block h-100 w-100" alt="...">
+
+                    <div class="mask" style="background-color: rgba(0, 0, 0, 0.301);">
+                        <div class="d-flex justify-content-center align-items-center h-100">
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single item -->
+                <div class="carousel-item ">
+                    <img src="~/template/img/2017100508040242.jpg" class="d-block w-100 h-100" alt="...">
+
+                    <div class="mask" style="background-color: rgba(0, 0, 0,0.301);">
+                        <div class="d-flex justify-content-center align-items-center h-100">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Inner -->
+
+                <!-- Controls -->
+                <a class="carousel-control-prev" href="#introCarousel" role="button" data-mdb-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#introCarousel" role="button" data-mdb-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <!-- Carousel wrapper -->
+
+        </div>
+        *@
+
+        <header id="main-header">
+            <nav class="bg-danger mb-4 navbar navbar-expand-lg navbar-dark text-light sticky-top ">
+                <!-- Container wrapper -->
+                <div class="container">
+                    <!-- Toggle button -->
+                    <button
+                    data-mdb-collapse-init
                     class="navbar-toggler"
                     type="button"
                     data-mdb-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
+                    aria-label="Toggle navigation"
+                    >
+                        <i class="fas fa-bars"></i>
+                    </button>
 
-            <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Navbar brand -->
-                <a class="navbar-brand mt-2 mt-lg-0" href="~/">
-                    <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-                         height="15"
-                         alt="MDB Logo"
-                         loading="lazy" /><span class="fs-5 ms-2 me-2">مدونة</span>
-                </a>
-                <!-- Left links -->
+                    <!-- Collapsible wrapper -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Navbar brand -->
+                        <a class="navbar-brand mt-2 mt-lg-0" href="~/">
+                            <img src="~/Uploads/WebSite/Images/@settings.LogoName"
+                            height="50"
+                            alt="MDB Logo"
+                            loading="lazy"
+                            /><span class="fs-5 ms-2 me-2 text-light fw-bolder">@settings.WebSiteName</span>
+                        </a>
+                        <!-- Left links -->
+                        @{
+                            List<MegaMenuItem> menuItems = new List<MegaMenuItem>();
+                          var menu =  settings.Menu;
 
-                <ul class="navbar-nav m-auto  mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="~/">الرئيسية</a>
-                    </li>
-                  
-                @await Component.InvokeAsync("Categories")
+                            if (menu != null && !string.IsNullOrEmpty(menu))
+                            {
+                                menuItems = JsonConvert.DeserializeObject<List<MegaMenuItem>>(menu);
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="~/Contact">تواصل معنا</a>
-                    </li>
-                    @if (signInManger.IsSignedIn(User))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Account" asp-action="LogOut" data-lng="es">@ResData.Logout</a>
-                        </li>
-                    }
+                            }
+
+                        }
+                        <ul class="navbar-nav m-1">
+                            @foreach (var item in menuItems)
+                            {
+                                if (item.SubItems.Any()) // إذا كان يحتوي على روابط فرعية
+                                {
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle fw-bold " href="@item.Url" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                            <i class="@item.Icon"></i> @item.Title
+                                        </a>
+                                        <ul class="dropdown-menu text-end p-2 fs-6">
+                                            @foreach (var subItem in item.SubItems)
+                                            {
+                                                <li><a class="dropdown-item" href="@subItem.Url"><i class="@subItem.Icon"></i> @subItem.Title</a></li>
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link fw-bold " href="@item.Url"><i class="@item.Icon"></i> @item.Title</a>
+                                    </li>
+                                }
+                            }
+                   @*          <li class="nav-item">
+                                <a class="nav-link" href="#">الرئيسية</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">حروب الجيل الرابع</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">حروب الجيل الخامس</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">وقائع بين الحقيقة والتدليس</a>
+                            </li> *@
+                        </ul>
+                        <!-- Left links -->
+                    </div>
+                    <!-- Collapsible wrapper -->
+
               
-                </ul>
-                <!-- Left links -->
-            </div>
-            <!-- Collapsible wrapper -->
-            <!-- Right elements -->
-            <div class="d-flex align-items-center">
-        
-                <span onclick="toggleTheme()" class="text-reset me-3 cursor" style="cursor:pointer;">
-                    <i class="fas fa-moon"></i>
-                </span>
 
-     
-                <!-- Avatar -->
+                  
+                  
+                    </div>
+                    <!-- Right elements -->
+             
+                <!-- Container wrapper -->
+            </nav>
+ </header>
+   <style>
+        .nav-item {
+            padding: 0.5rem 0xp;
+        }
+
+        .dropdown-hover:hover > .dropdown-menu {
+            display: inline-block;
+        }
+
+        .dropdown-hover > .dropdown-toggle:active {
+            /*Without this, clicking will make it sticky*/
+            pointer-events: none;
+        }
+   </style>
+   
+  
+        <!-- Start your project here-->
+        <main class="container-fluid">
+            @RenderBody()
+        </main>
+        <!-- End your project here-->
+        <!-- Footer -->
+        <footer class="bg-dark mt-4 text-center text-lg-start text-light ">
+            <!-- Section: Social media -->
+            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+                <!-- Left -->
+                <div class="me-5 d-none d-lg-block">
+                    <span>@ResGeneral.lblSocialmediaNetworks</span>
+                </div>
+                <!-- Left -->
+
+                <!-- Right -->
+                <div>
+                    <a href="@settings.FacebookLink" class="me-4 text-reset">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="@settings.XLink" class="me-4 text-reset">
+                        <i class="fab fa-twitter"></i>
+                    </a>
                
-            </div>
-            <!-- Right elements -->
-        </div>
-        <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
-
-    <main class="mt-4 mb-4">
-
-        <div class="container">
-        
-            <div class="row">
-                <div class="col-md-8 mt-4 mb-4 P-4">
-                   
-
-             @RenderBody()
+                    <a href="@settings.InstagramLink" class="me-4 text-reset">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="@settings.LinkedInLink" class="me-4 text-reset">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+               
                 </div>
-                <div class="col-md-4 mt-4 mb-4">
-                    <!--Section: Sidebar-->
-                    <section class="sticky-top" style="top: 80px;">
-                        <!--Section: Ad-->
-                        <section class="text-center border-bottom pb-4 mb-4">
-                            <div class="bg-image hover-overlay mb-4" data-mdb-ripple-init="">
-                                <img src="" class="img-fluid">
-                                <a href="https://mdbootstrap.com/docs/standard/" target="_blank">
-                                    <div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
-                                </a>
-                            </div>
-                            <h5>Material Design for Bootstrap 5</h5>
+                <!-- Right -->
+            </section>
+            <!-- Section: Social media -->
 
+            <!-- Section: Links  -->
+            <section class="">
+                <div class="container text-center text-md-start mt-5">
+                    <!-- Grid row -->
+                    <div class="row mt-3">
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <!-- Content -->
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                <img src="~/Uploads/WebSite/Images/@settings.LogoName" class="mx-3" height="50" alt="Alternate Text" />@settings.WebSiteName
+                            </h6>
                             <p>
-                                500+ components, free templates, 1-min installation, extensive tutorial, huge
-                                community. MIT license - free for personal &amp; commercial use
+                                @settings.Description
                             </p>
-                            <a role="button" class="btn btn-primary" data-mdb-ripple-init="" href="https://mdbootstrap.com/docs/standard/" target="_blank">Download for free<i class="fas fa-download ms-2"></i></a>
-                        </section>
-                        <!--Section: Ad-->
-                        <!--Section: Video-->
-                        <section class="text-center">
-                            <h5 class="mb-4">Learn the newest Bootstrap 5</h5>
+                        </div>
+                        <!-- Grid column -->
 
-                            <div class="embed-responsive embed-responsive-16by9 shadow-4-strong">
-                                                <h1>اهلا بكم</h1>
-                            </div>
-                        </section>
-                        <!--Section: Video-->
-                    </section>
-                    <!--Section: Sidebar-->
-                </div>
-            </div>
+                        <!-- Grid column -->
+                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                @ResGeneral.lblImportantLinks
+                            </h6>
+                            @{
+                                string[] links = settings.ColumnLinks1.Split(",");
+
+                                foreach(var link in links){
+                                    string[] pureLink = link.Split("-");
+                                    <p>
+
+
+                                        <a href="@pureLink[1]" class="text-reset">@pureLink[0]</a>
+                                    </p>
+                                }
+                         
+                            }
+         
+          
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+         @ResGeneral.lblRelatedLinks
+            </h6>
+            @{
+             string[] links2 = settings.ColumnLinks2.Split(",");
+
+               foreach (var link in links2)
+             {
+                string[] pureLink = link.Split("-");
+                <p>
+
+                <a href="@pureLink[1]" class="text-reset">@pureLink[0]</a>
+               </p>
+              }
+     }
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">@ResGeneral.lblContacts</h6>
+            <p><i class="fas fa-home me-3"></i>@settings.Adress</p>
+            <p>
+              <i class="fas fa-envelope me-3"></i>
+             @settings.EmailAddress
+            </p>
+            <p><i class="fas fa-phone me-3"></i> @settings.ContactNumber</p>
+
+          </div>
+          <!-- Grid column -->
         </div>
-    </main>
-    <!-- Start your project here-->
-    <!-- End your project here-->
-    <!-- Footer -->
-    <footer class="mt-4 text-center text-lg-start bg-body-tertiary text-muted">
-        <!-- Section: Social media -->
-        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-            <!-- Left -->
-            <div class="me-5 d-none d-lg-block">
-                <span>Get connected with us on social networks:</span>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.05);">
+                @DateTime.Now.Year  © @ResGeneral.lblCopyRights
+     <a class="text-reset fw-bold" href="https://www.mod.gov.eg/"></a>
+    </div>
+            <div class="text-center p-2 mb-4" style="background-color: rgba(0, 0, 0, 0.05);">
+             @ResGeneral.lblDevelopmentBy
             </div>
-            <!-- Left -->
-            <!-- Right -->
-            <div>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-github"></i>
-                </a>
+            <div class="text-center fs-3 my-4 p-2" style="background-color: rgba(0, 0, 0, 0.05);">
+                @ResAdmin.DR
             </div>
-            <!-- Right -->
-        </section>
-        <!-- Section: Social media -->
-        <!-- Section: Links  -->
-        <section class="">
-            <div class="container text-center text-md-start mt-5">
-                <!-- Grid row -->
-                <div class="row mt-3">
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <!-- Content -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>Company name
-                        </h6>
-                        <p>
-                            Here you can use rows and columns to organize your footer content. Lorem ipsum
-                            dolor sit amet, consectetur adipisicing elit.
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-                    <!-- Grid column -->
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Products
-                        </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Angular</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">React</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Vue</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Laravel</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
-                        </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Pricing</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Settings</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Orders</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Help</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-                    <!-- Grid column -->
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
-                        <p>
-                            <i class="fas fa-envelope me-3"></i>
-                            info@example.com
-                        </p>
-                        <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-                    </div>
-                    <!-- Grid column -->
-                </div>
-                <!-- Grid row -->
-            </div>
-        </section>
-        <!-- Section: Links  -->
-        <!-- Copyright -->
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2021 Copyright:
-            <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
     <!-- MDB -->
-    <script  src="~/template/js/mdb.umd.min.js"></script>
+        <script  src="~/template/js/mdb.umd.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
   
-</body>
+
+
+
+  </body>
 </html>
- 

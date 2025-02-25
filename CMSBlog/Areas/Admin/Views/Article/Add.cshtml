@@ -15,7 +15,7 @@
 <div class="col-12">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">DataTable with default features</h3>
+     
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -61,7 +61,7 @@
                     </script>
                 
                 <div class="form-group">
-                    <input type="submit" formmethod="post" value="Create" name="Create" class="btn btn-primary" />
+                    <input type="submit" formmethod="post" value="@ResAdmin.lblAdd" name="Create" class="btn btn-primary" />
                 </div>
             </form>
 
@@ -83,6 +83,11 @@
                 height: 100
             });
         </script>
+
+
+
+
+
         <script>
             var Upload = {
                 UploadDefaultImg: function (e) {
@@ -105,3 +110,8 @@
 
         }
     }
+    <style>
+        .note-btn-group .dropdown-menu {
+            left: auto !important;
+        }
+    </style>

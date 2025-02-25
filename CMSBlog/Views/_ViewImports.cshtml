@@ -1,7 +1,14 @@
-﻿@using CMSBlog
-@using CMSBlog.Components
-@using CMSBlog.Models
-@using Domain
-@using CMSBlog.Resources
+﻿@using CMSBlog;
+@using CMSBlog.Components;
+@using CMSBlog.Models;
+@using Domain;
+@using Bl.Services;
+@using Bl.Contracts;
+@using CMSBlog.Resources;
 @using Microsoft.AspNetCore.Identity;
+@using System.Text.RegularExpressions
+@using Microsoft.AspNetCore.Mvc;
+@using Newtonsoft.Json;
+@using System.Collections.Generic;
+@using System.Linq;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

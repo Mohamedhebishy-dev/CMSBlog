@@ -1,0 +1,178 @@
+﻿@model HomePageSettings
+
+<style>
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    .tag {
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+        .tag .remove-tag {
+            cursor: pointer;
+            font-weight: bold;
+        }
+</style>
+
+
+<h4>@ResAdmin.lblCategoryArticlesInHome</h4>
+<hr />
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title float-left ">@ResAdmin.lblCategoryArticlesInHome</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body ">
+            <form asp-controller="SiteSettings" asp-action="HomeSettings" method="post" enctype="multipart/form-data">
+                <input name="id" value="@Model.Id" type="hidden" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+     
+              
+                <div class="tags-container py-3">
+                    <label for="dropdown" class="form-label">@ResAdmin.lblCategories</label>
+
+                    <select id="dropdown" class="form-control" asp-items="@(new SelectList(ViewBag.Categories,"CategoryId","CategoryName"))">
+                </select>
+                    <div class="tags-container my-2 border p-4 rounded " id="tagsContainer">
+    
+                    </div>
+                    <input type="hidden" id="hiddenInput" name="selectedIds" value="@Model.value">
+                </div>
+                <div class="form-group">
+                    <input type="submit" formmethod="post" value="@ResAdmin.lblSave" name="Create" class="btn p-2 btn-primary " />
+                </div>
+            </form>
+
+            <div>
+              
+            </div>
+        </div>
+    </div>
+
+
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+
+        <script>
+            var Upload = {
+                UploadDefaultImg: function (e) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        CourseMediaImgName = file.name;
+                        CourseMediaImgBase64 = reader.result.slice(reader.result.indexOf('base64,') + 7);
+                        $("#tbImgName").html(file.name)
+                        $("#tbImgSrc").html(`<img class="thumbnail" src = "${reader.result}"  style = "width: 200px;height: 300px;border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />`)
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        </script>
+
+        <script>
+            // المصفوفة لحفظ الـ IDs
+            const selectedIds = new Set();
+            const dropdown = document.getElementById('dropdown');
+            const tagsContainer = document.getElementById('tagsContainer');
+            const hiddenInput = document.getElementById('hiddenInput');
+
+            // القيم المسبقة
+            const preselectedIds = hiddenInput.value.split(',');
+
+            // إضافة القيم المسبقة عند تحميل الصفحة
+            preselectedIds.forEach(id => {
+                if (id.trim()) {
+                    selectedIds.add(id.trim());
+                    addTagToUI(id.trim(), dropdown.querySelector(`option[value="${id.trim()}"]`).textContent);
+                }
+            });
+
+            // عند اختيار عنصر من القائمة
+            dropdown.addEventListener('change', () => {
+                const selectedValue = dropdown.value;
+                const selectedText = dropdown.options[dropdown.selectedIndex].text;
+
+                // تحقق من أن العنصر غير مضاف مسبقًا
+                if (!selectedIds.has(selectedValue)) {
+                    selectedIds.add(selectedValue);
+
+                    // إضافة العلامة إلى واجهة المستخدم
+                    addTagToUI(selectedValue, selectedText);
+
+                    // تحديث القيمة المخفية
+                    updateHiddenInput();
+                }
+            });
+
+            // حدث لإزالة العلامة عند النقر على "x"
+            tagsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('remove-tag')) {
+                    const id = e.target.getAttribute('data-id');
+                    selectedIds.delete(id);
+
+                    // إزالة العلامة من واجهة المستخدم
+                    e.target.parentElement.remove();
+
+                    // تحديث القيمة المخفية
+                    updateHiddenInput();
+                }
+            });
+
+            // وظيفة لإضافة علامة إلى واجهة المستخدم
+            function addTagToUI(id, text) {
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.innerHTML = `
+                    ${text}
+                    <span class="remove-tag" data-id="${id}">&times;</span>
+                `;
+                tagsContainer.appendChild(tag);
+            }
+
+            // تحديث قيمة الـ input المخفي
+            function updateHiddenInput() {
+                hiddenInput.value = Array.from(selectedIds).join(',');
+            }
+        </script>
+        @if (TempData["MessageType"] != null)
+        {
+            <script>
+                 let MessageType = @TempData["MessageType"];
+                 console.log(MessageType);
+                 switch (MessageType)
+                 {
+                 case 1:alert.Success('@Html.Raw(MessagesAR.SuccessMessage)','@Html.Raw(MessagesAR.SaveSuccessMessage)');
+                     break;
+                case 2:alert.Error('@Html.Raw(MessagesAR.ErrorMessage)','@Html.Raw(MessagesAR.SaveFailed)');
+                     break;
+                case 3:
+                     alert.Success('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.DeleteSuccessMessage)');
+                     break;
+                 case 4:
+                     alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.DeleteFailed)')
+                     break;
+                 case 5:
+                         alert.Success   ('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.UpdateSuccessMessage)');
+                     break;
+                 case 6:
+                     alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.UpdateFailed)');
+                     break;
+                     default: break;
+                 }
+            </script>
+        }
+    }

@@ -1,0 +1,218 @@
+﻿@model EditUserViewModel
+
+
+<style>
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    .tag {
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+        .tag .remove-tag {
+            cursor: pointer;
+            font-weight: bold;
+        }
+</style>
+<h4>@ResAdmin.lblEdit</h4>
+<hr />
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">DataTable with default features</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input asp-for="UserId" type="hidden" value="@Model.UserId" />
+
+                <div class="form-group">
+                    <label for="UserName">اسم المستخدم:</label>
+                    <input type="text" id="UserName" asp-for="UserName" class="form-control" value="@Model.UserName" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="Email">البريد الإلكتروني:</label>
+                    <input type="email" id="Email" asp-for="Email" class="form-control" value="@Model.Email" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="PhoneNumber">رقم الهاتف:</label>
+                    <input type="text" id="PhoneNumber" asp-for="PhoneNumber" class="form-control" value="@Model.PhoneNumber" />
+                </div>
+
+                <div class="form-group">
+                    <label for="NewPassword">كلمة المرور الجديدة:</label>
+                    <input type="password" id="NewPassword" asp-for="NewPassword" class="form-control" />
+                </div>
+
+                <div id="rolesGroup" class="mb-4">
+                    <h5>إضافة الأدوار</h5>
+
+                    <label class="form-label">اختيار الدور:</label>
+                    <div class="input-group mb-3">
+                        <select id="dropdown" name="RolesToAdd " class="form-control role-select" asp-items="@(new SelectList(Model.AvailableRoles))">
+                        </select>
+                        <button type="button" class="btn btn-primary add-role-button">إضافة</button>
+                    </div>
+              
+
+                    <div class="tags-container" id="tagsContainer"></div>
+                    <input type="hidden" class="hidden-input" name="RolesToAdd" value="@string.Join(",", Model.UserRoles)" />
+                            </div>
+                      
+
+              
+
+        
+
+                <div class="form-group">
+                    <input type="submit" formmethod="post" value="@ResAdmin.lblSave" name="Create" class="btn btn-primary" />
+                </div>
+            </form>
+
+            <div>
+                <a class="btn btn-primary" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+
+        <script>
+            var Upload = {
+                UploadDefaultImg: function (e) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        CourseMediaImgName = file.name;
+                        CourseMediaImgBase64 = reader.result.slice(reader.result.indexOf('base64,') + 7);
+                        $("#tbImgName").html(file.name)
+                        $("#tbImgSrc").html(`<img class="thumbnail" src = "${reader.result}"  style = "width: 200px;height: 300px;border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />`)
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        </script>
+        @if (TempData["MessageType"] != null)
+        {
+            <script>
+                 let MessageType = @TempData["MessageType"];
+                 console.log(MessageType);
+                 switch (MessageType)
+                 {
+                 case 1:alert.Success('@Html.Raw(MessagesAR.SuccessMessage)','@Html.Raw(MessagesAR.SaveSuccessMessage)');
+                     break;
+                case 2:alert.Error('@Html.Raw(MessagesAR.ErrorMessage)','@Html.Raw(MessagesAR.SaveFailed)');
+                     break;
+                case 3:
+                     alert.Success('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.DeleteSuccessMessage)');
+                     break;
+                 case 4:
+                     alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.DeleteFailed)')
+                     break;
+                 case 5:
+                         alert.Success   ('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.UpdateSuccessMessage)');
+                     break;
+                 case 6:
+                     alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.UpdateFailed)');
+                     break;
+                     default: break;
+                 }
+            </script>
+        }
+        <script>
+            const selectedRoles = new Set();
+            const removedRoles = new Set();
+            const roleSelect = document.querySelector('.role-select');
+            const addRoleButton = document.querySelector('.add-role-button');
+            const tagsContainer = document.querySelector('#tagsContainer');
+            const hiddenInput = document.querySelector('.hidden-input');
+            const removedInput = document.querySelector('.removed-input');
+
+            // جلب الأدوار الحالية من input hidden
+            const currentRoles = document.querySelector('.hidden-input').value;
+            currentRoles.split(',').forEach(role => {
+                if (role) {
+                    selectedRoles.add(role);
+                    const tag = document.createElement('div');
+                    tag.className = 'tag';
+                    tag.innerHTML = `
+                        ${role}
+                        <span class="remove-tag" data-value="${role}">&times;</span>
+                    `;
+                    tagsContainer.appendChild(tag);
+                }
+            });
+
+            // إضافة دور عند النقر على الزر
+            addRoleButton.addEventListener('click', () => {
+                const roleValue = roleSelect.value;
+
+                if (roleValue && !selectedRoles.has(roleValue)) {
+                    selectedRoles.add(roleValue);
+
+                    // إنشاء العلامة وإضافتها إلى الواجهة
+                    const tag = document.createElement('div');
+                    tag.className = 'tag';
+                    tag.innerHTML = `
+                        ${roleValue}
+                        <span class="remove-tag" data-value="${roleValue}">&times;</span>
+                    `;
+                    tagsContainer.appendChild(tag);
+
+                    // تحديث الحقل المخفي
+                    updateHiddenInput();
+
+                    // إفراغ الاختيار
+                    roleSelect.value = '';
+                }
+            });
+
+            // حدث لإزالة العلامة عند النقر على "x" (لحذف الدور)
+            tagsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('remove-tag')) {
+                    const value = e.target.getAttribute('data-value');
+                    if (selectedRoles.has(value)) {
+                        selectedRoles.delete(value);
+                    } else {
+                        removedRoles.add(value);
+                        e.target.parentElement.classList.add('removed-tag');
+                    }
+
+                    // إزالة العلامة من واجهة المستخدم
+                    e.target.parentElement.remove();
+
+                    // تحديث الحقل المخفي
+                    updateHiddenInput();
+                    updateRemovedInput();
+                }
+            });
+
+            // تحديث قيمة الـ input المخفي للأدوار المختارة
+            function updateHiddenInput() {
+                hiddenInput.value = Array.from(selectedRoles).join(',');
+            }
+
+            // تحديث قيمة الـ input المخفي للأدوار المحذوفة
+            function updateRemovedInput() {
+                removedInput.value = Array.from(removedRoles).join(',');
+            }
+        </script>
+
+    }

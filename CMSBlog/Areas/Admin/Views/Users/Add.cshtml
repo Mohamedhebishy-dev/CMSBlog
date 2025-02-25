@@ -1,0 +1,114 @@
+﻿@model RegisterViewModel
+
+
+
+<h4>@ResAdmin.lblEdit</h4>
+<hr />
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">DataTable with default features</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <form asp-action="Add" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">@ResAdmin.lblUserName</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+          
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">@ResAdmin.lblEmail</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Paassord" class="control-label">@ResAdmin.lblPassword</label>
+                    <input asp-for="Paassord" type="password" class="form-control" />
+                    <span asp-validation-for="Paassord" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPaassord" class="control-label">@ResAdmin.lblPassword</label>
+                    <input asp-for="ConfirmPaassord" type="password" class="form-control" />
+                    <span asp-validation-for="ConfirmPaassord" class="text-danger"></span>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label name="role" class="control-label">@ResAdmin.lblChoseRole</label>
+                     
+                    <select name="role" id="dropdown" class="form-control" asp-items="@(new SelectList(ViewBag.Roles,"Name","Name"))">
+                    </select>
+
+                   
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <input type="submit" formmethod="post" value="@ResAdmin.lblSave" name="Create" class="btn btn-primary" />
+                </div>
+            </form>
+
+            <div>
+                <a class="btn btn-primary" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+
+            <script>
+                var Upload = {
+                    UploadDefaultImg: function (e) {
+                        const file = e.target.files[0];
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                            CourseMediaImgName = file.name;
+                            CourseMediaImgBase64 = reader.result.slice(reader.result.indexOf('base64,') + 7);
+                            $("#tbImgName").html(file.name)
+                            $("#tbImgSrc").html(`<img class="thumbnail" src = "${reader.result}"  style = "width: 200px;height: 300px;border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />`)
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+            </script>
+        @if (TempData["MessageType"] != null)
+        {
+                    <script>
+                         let MessageType = @TempData["MessageType"];
+                         console.log(MessageType);
+                         switch (MessageType)
+                         {
+                         case 1:alert.Success('@Html.Raw(MessagesAR.SuccessMessage)','@Html.Raw(MessagesAR.SaveSuccessMessage)');
+                             break;
+                        case 2:alert.Error('@Html.Raw(MessagesAR.ErrorMessage)','@Html.Raw(MessagesAR.SaveFailed)');
+                             break;
+                        case 3:
+                             alert.Success('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.DeleteSuccessMessage)');
+                             break;
+                         case 4:
+                             alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.DeleteFailed)')
+                             break;
+                         case 5:
+                                 alert.Success   ('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.UpdateSuccessMessage)');
+                             break;
+                         case 6:
+                             alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.UpdateFailed)');
+                             break;
+                             default: break;
+                         }
+                    </script>
+        }
+    }

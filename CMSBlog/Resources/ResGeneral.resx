@@ -118,45 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblActions" xml:space="preserve">
-    <value>الأحداث</value>
+    <value>Actions</value>
   </data>
   <data name="lblAllCategories" xml:space="preserve">
-    <value>جميع التصنيفات</value>
-  </data>
-  <data name="lblAreYouSureEdit" xml:space="preserve">
-    <value>هل انت متأكد من هذا التعديل</value>
-  </data>
-  <data name="lblCategories" xml:space="preserve">
-    <value>التصنيفات</value>
-  </data>
-  <data name="lblCategoryName" xml:space="preserve">
-    <value>اسم التصنيف</value>
-  </data>
-  <data name="lblEdit" xml:space="preserve">
-    <value>تعديل</value>
-  </data>
-  <data name="lblImage" xml:space="preserve">
-    <value>صورة</value>
+    <value>All Categories</value>
   </data>
   <data name="lblLatestArticles" xml:space="preserve">
-    <value>اخر المقالات</value>
-  </data>
-  <data name="lblNew" xml:space="preserve">
-    <value>إضافة</value>
+    <value>Latest Articles</value>
   </data>
   <data name="lblReadMore" xml:space="preserve">
-    <value>اقرأ المزيد</value>
+    <value>Read More</value>
   </data>
   <data name="lblRequiredName" xml:space="preserve">
-    <value>يجب إدخال الإسم</value>
+    <value>Required Name</value>
   </data>
-  <data name="lblSave" xml:space="preserve">
-    <value>حفظ</value>
+  <data name="lblCategories" xml:space="preserve">
+    <value>Categories</value>
   </data>
-  <data name="lblUpload" xml:space="preserve">
-    <value>رفع ملف</value>
+  <data name="lblContacts" xml:space="preserve">
+    <value>Contacts</value>
   </data>
-  <data name="lblYesConfrm" xml:space="preserve">
-    <value>نعم تأكيد</value>
+  <data name="lblCopyRights" xml:space="preserve">
+    <value>Copyright Ministry of Defence of Egypt</value>
+  </data>
+  <data name="lblDevelopmentBy" xml:space="preserve">
+    <value>Development by Mohamed Hebishy</value>
+  </data>
+  <data name="lblImportantLinks" xml:space="preserve">
+    <value>Important Links</value>
+  </data>
+  <data name="lblRelatedLinks" xml:space="preserve">
+    <value>Related Links</value>
+  </data>
+  <data name="lblSocialmediaNetworks" xml:space="preserve">
+    <value>Get connected with us on social networks</value>
   </data>
 </root>

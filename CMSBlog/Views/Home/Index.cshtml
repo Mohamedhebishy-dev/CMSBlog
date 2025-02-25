@@ -1,7 +1,140 @@
-﻿
-@model List<Article>
+﻿@model HomeModelView
+@using System.Text.RegularExpressions
 @{
     ViewData["Title"] = "Home Page";
 }
+@inject UserManager<ApplicationUser> UserManger
+<style>
 
-<partial name="ArticlesHome" />
+
+    .card-body {
+        flex-grow: 1; /* تجعل الجسم يتمدد لتعبئة المساحة المتاحة */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card-title {
+        min-height: 50px; /* ضبط الحد الأدنى لارتفاع العنوان */
+    }
+
+
+
+   
+
+
+</style>
+
+<section class="row mt-4 text-center">
+   
+        <div class="col-md "><img src="~/template/img/war.png" width="150" height="150" class=" m-2" alt=""><h3 class="fw-bold text-light bg-warning  p-2">العصور القديمة</h3><p class="lh-lg fs-5 p-2">بدأ التنظيم العسكري في مصر القديمة مع توحيد مملكتي الشمال والجنوب، وكان الجيش المصري منظمًا جيدًا مع استخدام السيوف والرماح والدروع البسيطة، ثم تطورت هذه الأدوات لاحقًا مع إدخال العربات الحربية على يد الهكسوس. كانت المعارك الكبيرة مثل معركة قادش ضد الحيثيين في عهد رمسيس الثاني من أبرز معارك هذا العصر.</p></div>
+        <div class="col-md "><img src="~/template/img/سيفان.png" width="150" height="150" class=" m-2" alt=""><h3 class="fw-bold text-light bg-success  p-2">العصور الإسلامية</h3><p class="lh-lg fs-5 p-2">العسكرية المصرية في العصور الإسلامية تميزت بالقوة والتنظيم، حيث اعتمدت على جيوش متنوعة ومتطورة للدفاع عن الدولة وتأمين حدودها، مثل المماليك الذين هزموا المغول.</p></div>
+        <div class="col-md "><img src="~/template/img/egypt.png" width="150" height="150" class=" m-2" alt=""><h3 class="fw-bold text-light bg-danger  p-2">العصور الحديثة</h3><p class="lh-lg fs-5 p-2">بدأ التنظيم العسكري في مصر القديمة مع توحيد مملكتي الشمال والجنوب، وكان الجيش المصري منظمًا جيدًا مع استخدام السيوف والرماح والدروع البسيطة، ثم تطورت هذه الأدوات لاحقًا مع إدخال العربات الحربية على يد الهكسوس. كانت المعارك الكبيرة مثل معركة قادش ضد الحيثيين في عهد رمسيس الثاني من أبرز معارك هذا العصر.</p></div>
+
+</section>
+@foreach(var item in Model.CategoryArticles)
+{
+    if(item.category.Articles.Count()!=0){
+        <section>
+            <h2 class="text-light fw-bold p-3 bg-primary  text-center ">
+                @item.category.CategoryName
+            </h2>
+            <div class="row">
+                @foreach (var article in item.Articles)
+                {
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="card">
+                            <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+                                <img src="~/Uploads/Articles/Images/@article.ImageName" class="border border-primary border-4 max-height-img" />
+                                <a href="@Url.Action("Details", "Article", new { Url = article.Url })">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </a>
+                            </div>
+                            <div class="card-body ">
+                                <h5 class="card-title fw-bold">@article.Title</h5>
+                                <span class="">
+                                    <i class="nav-icon far fa-calendar-alt mx-1"></i>
+                                    @ResData.lblCreatedDate
+                            @article.CreatedDate
+                           
+                                </span>
+                      
+                                <p class="">
+                                    @{
+                                        string plainText = Regex.Replace(article.ContentHtml, "<.*?>", string.Empty);
+                                        plainText = Regex.Replace(plainText, "&nbsp;", string.Empty);
+
+                                        if (plainText.Length > 150)
+                                        {
+                                            @plainText.Substring(0, 150)
+                                            ;
+                                        }
+                                        else
+                                        {
+                                            @plainText
+                                            ;
+                                        }
+                                    }......
+                                </p>
+                                <div>
+
+                                <a href="@Url.Action("Details", "Article", new { Url = article.Url })" class="btn btn-primary fs-6" data-mdb-ripple-init>
+                                    @ResGeneral.lblReadMore
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="text-center">
+
+            <a href="~/category/@item.category.CategoryUrl" class="btn btn-primary my-3 fs-6" data-mdb-ripple-init>@ResGeneral.lblReadMore</a>
+            </div>
+        </section>
+    }
+  
+
+
+}
+
+
+
+
+
+
+
+<section>
+
+    <section class="text-center text-md-start">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col  mt-4 mb-4 P-4 ps-4">
+
+
+
+
+
+
+                        <h2 class="text-light fw-bold p-3 bg-primary  text-center ">أحدث المقالات</h2>
+                    <section class="text-center text-md-end p-5  ">
+
+
+
+
+                        @await Html.PartialAsync("ArticlesHome",Model.Articles)
+
+
+                    </section>
+                </div>
+                <!--Section: Sidebar-->
+      @*   <partial name="sidebarHome" /> *@
+                <!--Section: Sidebar-->
+
+            </div>
+        </div>
+    </section>
+

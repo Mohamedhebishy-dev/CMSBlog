@@ -1,39 +1,44 @@
-﻿@model List<Article>;
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model List<Article>;
 @{
-    ViewData["Title"] = @ResAdmin.lblArticles;
-    ViewData["TitleHeader"] = @ResAdmin.lblArticles;
+
 }
+@* @inject Microsoft.Extensions.Localization.IStringLocalizer<CMSBlog.Resources.MessagesAR> Localizer
+ *@
 
 <div class="col-12">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">DataTable with default features</h3>
+        
+
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <a asp-action="Add" class="btn btn-outline-primary">@ResAdmin.lblNewCategory</a>
+      
+            <a asp-action="Add" class="btn btn-outline-primary">@ResAdmin.lblNewArticle</a>
             <table id="example1" class="table table-bordered table-striped text-center dataTable" role="grid" aria-describedby="example1_info">
                 <thead>
                     <tr>
-                        <th>#</th>
+
                         <th>@ResAdmin.lblTitle</th>
                         <th>@ResAdmin.lblUrls</th>
                         <th>@ResAdmin.lblCategoryName</th>
+                        <th>@ResAdmin.lblActions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.ArticleId</td>
+
                             <td>@item.Title</td>
                             <td>@item.Url</td>
                             <td>@item.Category.CategoryName</td>
                             <td>
-                                <a asp-controller="Category" asp-action="Details" asp-route-categoryId="@item.ArticleId" class="btn btn-info">@ResAdmin.lblInfo</a>
+                                <a target="_blank" href="~/article/@item.Url" class="btn btn-info">@ResAdmin.lblshow</a>
 
-                                <a asp-controller="Category" asp-action="Edit" asp-route-categoryId="@item.ArticleId" class="btn btn-warning">@ResAdmin.lblEdit</a>
-                                <a asp-controller="Category" asp-action="Delete" asp-route-categoryId="@item.ArticleId" class="btn btn-danger">@ResAdmin.lblDelete</a>
+                                <a asp-controller="Article" asp-action="Edit" asp-route-articleId="@item.ArticleId" class="btn btn-warning">@ResAdmin.lblEdit</a>
+                                <a asp-controller="Article" asp-action="Delete" asp-route-articleId="@item.ArticleId" class="btn btn-danger">@ResAdmin.lblDelete</a>
                             </td>
                         </tr>
                     }
@@ -56,14 +61,36 @@
     <script>
         $(function () {
             $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-            });
+        
         });
     </script>
+    @if (TempData["MessageType"] != null)
+    {
+        <script>
+             let MessageType = @TempData["MessageType"];
+             console.log(MessageType);
+             switch (MessageType)
+             {
+             case 1:alert.Success('@Html.Raw(MessagesAR.SuccessMessage)','@Html.Raw(MessagesAR.SaveSuccessMessage)');
+                 break;
+            case 2:alert.Error('@Html.Raw(MessagesAR.ErrorMessage)','@Html.Raw(MessagesAR.SaveFailed)');
+                 break;
+            case 3:
+                 alert.Success('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.DeleteSuccessMessage)');
+                 break;
+             case 4:
+                 alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.DeleteFailed)')
+                 break;
+             case 5:
+                     alert.Success   ('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.UpdateSuccessMessage)');
+                 break;
+             case 6:
+                 alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.UpdateFailed)');
+                 break;
+                 default: break;
+             }
+        </script>
+    }
+}
+
 }

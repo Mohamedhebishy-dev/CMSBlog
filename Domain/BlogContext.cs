@@ -17,6 +17,8 @@ namespace Domain
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<HomePageSettings> HomePageSettings { get; set; }
+        public virtual DbSet<SiteSettings> SiteSettings { get; set; }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    base.OnConfiguring(optionsBuilder);

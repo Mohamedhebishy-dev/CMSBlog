@@ -32,7 +32,8 @@ namespace CMSBlog.Controllers
 
             {
                 var User = await _userManager.FindByEmailAsync(model.Email);
-
+                if (User is null)
+                    return View();
                 var resultSignIn = await _signInManager.PasswordSignInAsync(User, model.Password, true, true);
 
 

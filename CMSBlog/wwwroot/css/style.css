@@ -1,9 +1,91 @@
-.bg-militry{
-    background-color: #f1eee2;
+
+
+* {
+    font-family: 'Cairo';
 }
-.bg-militrydark{
-    background-color: #08222feb !important;
+
+
+/* Carousel styling */
+#introCarousel,
+.carousel-inner,
+.carousel-item,
+.carousel-item.active {
+    height: 100vh;
 }
-.bg-militrylight{
-    background-color: #f7f5ec !important;
+
+    .carousel-item:nth-child(1) {
+        background-image: url('./nagib-12-jpg.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .carousel-item:nth-child(2) {
+        background-image: url('./«·—∆Ì”_„Õ„œ_‰ÃÌ»_›Ì_„ﬂ »_«·›—Ìﬁ_Õ”Ì‰_›—Ìœ_»⁄œ_«·«” Ì·«¡_⁄·ÌÂ.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .carousel-item:nth-child(3) {
+        background-image: url('./893.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+
+/* Height for devices larger than 576px */
+@media (min-width: 992px) {
+    #introCarousel {
+        margin-top: -120px;
+    }
 }
+
+.navbar .nav-link {
+    color: #fff !important;
+}
+
+footer {
+    margin-bottom: -120px;
+}
+
+.max-height-img {
+    height: 260px !important;
+    width: 100% !important;
+}
+
+
+.hero-section {
+    padding: 50px 0;
+    background-color: #f8f9fa;
+}
+
+.carou sel-item img {
+    height: 300px;
+    object-fit: cover;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+#main-header {
+    width: 100%;
+    transition: bottom 0.3s;
+}
+
+header {
+    z-index: 999999 !important;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+

@@ -1,13 +1,12 @@
 ﻿@model List<Category>;
 @{
-    ViewData["Title"] = ResAdmin.lblCategories;
-    ViewData["TitleHeader"] = ResAdmin.lblCategories;
+
 }
 
 <div class="col-12">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">DataTable with default features</h3>
+
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -15,7 +14,7 @@
             <table id="example1" class="table table-bordered table-striped text-center dataTable" role="grid" aria-describedby="example1_info">
                 <thead>
                     <tr>
-                        <th>#</th>
+
                         <th>@ResAdmin.lblCategoryName</th>
                         <th>@ResAdmin.lblUrls</th>
                         <th>@ResAdmin.lblActions</th>
@@ -25,14 +24,14 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.CategoryId</td>
+
                             <td>@item.CategoryName</td>
                             <td>@item.CategoryUrl</td>
                             <td>
-                                <a asp-controller="Category" asp-action="Details" asp-route-categoryId="@item.CategoryId" class="btn btn-info">@ResAdmin.lblInfo</a>
+                                <a href="~/category/@item.CategoryUrl" class="btn btn-info" target="_blank">@ResAdmin.lblshow</a>
 
                                 <a asp-controller="Category" asp-action="Edit" asp-route-categoryId="@item.CategoryId" class="btn btn-warning">@ResAdmin.lblEdit</a>
-                                <a asp-controller="Category" asp-action="Delete" asp-route-categoryId="@item.CategoryId" class="btn btn-danger">@ResAdmin.lblDelete</a>
+                                <a data-id="@item.CategoryId" class="btn btn-danger">@ResAdmin.lblDelete</a>
                             </td>
                         </tr>
                     }
@@ -54,15 +53,59 @@
     <script src="~/Admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
     <script>
         $(function () {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-            });
+        $("#example1").DataTable();
+        $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        });
         });
     </script>
+    <script>
+        $(document).ready(function (){
+        $(".btn-danger").on("click",function(e){
+        let id = $(this).data('id');
+        console.log(id)
+        let deleteUrl = `@Url.Action("Delete", "Category")`;
+        alert.ConfirmDelete(function(result){
+        if(result){
+        window.location.href=deleteUrl + "?CategoryId=" +id;
+        }
+        });
+        })
+        })
+    </script>
+    @if (TempData["MessageType"] != null)
+    {
+        <script>
+             let MessageType = @TempData["MessageType"];
+             console.log(MessageType);
+             switch (MessageType)
+             {
+             case 1:alert.Success('@Html.Raw(MessagesAR.SuccessMessage)','@Html.Raw(MessagesAR.SaveSuccessMessage)');
+                 break;
+            case 2:alert.Error('@Html.Raw(MessagesAR.ErrorMessage)','@Html.Raw(MessagesAR.SaveFailed)');
+                 break;
+            case 3:
+                 alert.Success('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.DeleteSuccessMessage)');
+                 break;
+             case 4:
+                 alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.DeleteFailed)')
+                 break;
+             case 5:
+                     alert.Success   ('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.UpdateSuccessMessage)');
+                 break;
+             case 6:
+                 alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.UpdateFailed)');
+                 break;
+                 default: break;
+             }
+        </script>
+    }
 }
+
+
+

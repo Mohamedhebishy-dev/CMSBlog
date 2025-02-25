@@ -1,0 +1,84 @@
+﻿@model ApplicationUser
+
+<div class="card card-primary card-outline">
+    <div class="card-body box-profile">
+        <div class="text-center">
+            <img class="profile-user-img img-fluid img-circle" src="~/Uploads/Profiles/Images/@Model.ImageUser" alt="User profile picture">
+        </div>
+
+        <h3 class="profile-username text-center"> @Model.Name</h3>
+
+        <p class="text-muted text-center">@Model.UserName</p>
+
+        <ul class="list-group list-group-unbordered mb-3">
+            <li class="list-group-item">
+                <b>@ResAdmin.lblEmail</b> <a class="float-right">@Model.Email</a>
+            </li>
+            <li class="list-group-item">
+                <b>@ResAdmin.lblEmailConfirmed</b> <a class="float-right">@Model.EmailConfirmed</a>
+            </li>
+            <li class="list-group-item">
+                <b>@ResAdmin.lblPhoneNumber</b> <a class="float-right">
+                    @if(Model.PhoneNumber ==null){
+                     
+                        @ResAdmin.lblUnknown
+                        ;
+                    }else{
+                        @Model.PhoneNumber;
+                    }
+                    </a>
+            </li>
+        </ul>
+
+        <a asp-action="Edit" class="btn btn-primary btn-block"><b>@ResAdmin.lblEdit</b></a>
+    </div>
+    <!-- /.card-body -->
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        var Upload = {
+            UploadDefaultImg: function (e) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    CourseMediaImgName = file.name;
+                    CourseMediaImgBase64 = reader.result.slice(reader.result.indexOf('base64,') + 7);
+                    $("#tbImgName").html(file.name)
+                    $("#tbImgSrc").html(`<img class="thumbnail" src = "${reader.result}"  style = "width: 200px;height: 300px;border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />`)
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+    @if (TempData["MessageType"] != null)
+    {
+        <script>
+             let MessageType = @TempData["MessageType"];
+             console.log(MessageType);
+             switch (MessageType)
+             {
+             case 1:alert.Success('@Html.Raw(MessagesAR.SuccessMessage)','@Html.Raw(MessagesAR.SaveSuccessMessage)');
+                 break;
+            case 2:alert.Error('@Html.Raw(MessagesAR.ErrorMessage)','@Html.Raw(MessagesAR.SaveFailed)');
+                 break;
+            case 3:
+                 alert.Success('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.DeleteSuccessMessage)');
+                 break;
+             case 4:
+                 alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.DeleteFailed)')
+                 break;
+             case 5:
+                     alert.Success   ('@Html.Raw(MessagesAR.SuccessMessage)', '@Html.Raw(MessagesAR.UpdateSuccessMessage)');
+                 break;
+             case 6:
+                 alert.Error('@Html.Raw(MessagesAR.ErrorMessage)', '@Html.Raw(MessagesAR.UpdateFailed)');
+                 break;
+                 default: break;
+             }
+        </script>
+    }
+}

@@ -21,6 +21,7 @@ namespace Domain.Reposotry
         public void DeleteById(Guid Id)
         {
             dbSet.Remove(GetById(Id));
+            BlogContext.SaveChanges();
         }
 
         public List<T> GetAll()
