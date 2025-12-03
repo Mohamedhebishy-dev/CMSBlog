@@ -1,4 +1,4 @@
-# Historical Blog CMS
+# Blog CMS
 
 A professional Content Management System (CMS) designed for a historical blog, built using **ASP.NET Core MVC** following **Clean Architecture** principles to ensure scalability, maintainability, and high performance.
 
